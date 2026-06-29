@@ -385,13 +385,13 @@
 
 | ID | Task | Acceptance | Status |
 |----|------|------------|--------|
-| 8.0.1 | Phase 8 AYSU | ≥121 tests, integrity green, CI green on main | ⬜ |
+| 8.0.1 | Phase 8 AYSU | ≥121 tests, integrity green, CI green on main | ✅ |
 
 ---
 
 ## Quick Reference
 
-- **Next incomplete (work order):** `8.0.1` (CI green on main) then `8.5.1.3` (PyPI)
+- **Next incomplete (work order):** `8.5.1.3` (PyPI publish) then Phase 9 planning
 - **Master plan:** `docs/plans/epic-phase8.md` · Phase 9: not planned
 - **Integrity gate:** `bash scripts/integrity_check.sh`
 - **Push:** `bash scripts/push_github.sh` (SSH)
