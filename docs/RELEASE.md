@@ -7,12 +7,27 @@
 
 ## Push to GitHub
 
+**Option A — automated script (recommended):**
+
 ```bash
+# 1. Authenticate (one-time): visit https://github.com/login/device with code from:
+~/.local/bin/gh auth login --hostname github.com --git-protocol ssh --skip-ssh-key -p ssh
+
+# Or set a PAT: export GITHUB_TOKEN=ghp_...
+
+# 2. Push (creates repo if missing):
 cd /home/adrianlos/projects/astrosim
-git push -u origin main
+bash scripts/push_github.sh
 ```
 
-Requires GitHub credentials (PAT or SSH). CI must pass on `main`.
+**Option B — manual:** Create empty repo `aadriantech/astrosim` on GitHub, then:
+
+```bash
+git push -u origin main
+git push origin v0.1.0 v0.2.0
+```
+
+SSH auth on this host is configured for `icgtdistrictlos`. You need repo create access under `aadriantech` or set `GITHUB_OWNER=icgtdistrictlos`.
 
 ## Tag a release
 
