@@ -3,7 +3,7 @@
 **Scope:** LLM integration + offline optimization heuristics.  
 **Owns:** `ai/*.py`  
 **Depends on:** ENG  
-**Last verified:** 2026-06-29 · baseline audit
+**Last verified:** 2026-06-29 · Phase 11 insight export
 
 ## Purpose
 
@@ -25,3 +25,5 @@
 ## Tests
 
 - `tests/test_ai_hooks.py`
+- `tests/test_insights.py`
+- `tests/test_scenario_editor.py`

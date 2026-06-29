@@ -19,6 +19,14 @@ _CREW_RE = re.compile(r"(?:increase|set|raise)\s+crew(?:\s+count)?\s+to\s+(\d+)"
 _SOLAR_RE = re.compile(r"(?:increase|set|raise)\s+solar(?:\s+array)?\s+(?:to\s+)?(\d+(?:\.\d+)?)\s*kw", re.I)
 _BATTERY_RE = re.compile(r"(?:increase|set|raise)\s+battery(?:\s+storage)?\s+(?:to\s+)?(\d+(?:\.\d+)?)\s*kwh", re.I)
 _DURATION_RE = re.compile(r"(?:set|run)\s+duration\s+(?:to\s+)?(\d+(?:\.\d+)?)\s*h(?:ours)?", re.I)
+_REGOLITH_RE = re.compile(
+    r"(?:set|increase)\s+regolith(?:\s+throughput)?\s+(?:to\s+)?(\d+(?:\.\d+)?)\s*(?:kg/?h|kg per hour)?",
+    re.I,
+)
+_ISRU_POWER_RE = re.compile(
+    r"(?:set|increase)\s+isru\s+power\s+(?:to\s+)?(\d+(?:\.\d+)?)\s*kw",
+    re.I,
+)
 
 
 def parse_edit_intent(prompt: str) -> ScenarioPatch:
@@ -44,6 +52,14 @@ def parse_edit_intent(prompt: str) -> ScenarioPatch:
     battery_match = _BATTERY_RE.search(text)
     if battery_match:
         parameters["battery_kwh"] = float(battery_match.group(1))
+
+    regolith_match = _REGOLITH_RE.search(text)
+    if regolith_match:
+        parameters["regolith_throughput_kg_h"] = float(regolith_match.group(1))
+
+    isru_power_match = _ISRU_POWER_RE.search(text)
+    if isru_power_match:
+        parameters["isru_power_kw"] = float(isru_power_match.group(1))
 
     if simulation:
         patch.simulation = simulation

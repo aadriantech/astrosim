@@ -1,0 +1,23 @@
+site_name: AstroSim
+site_description: Open-source space habitat simulation framework
+repo_url: https://github.com/aadriantech/astrosim
+repo_name: aadriantech/astrosim
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: cyan
+
+nav:
+  - Home: index.md
+  - Tutorial: TUTORIAL.md
+  - Architecture: ARCHITECTURE.md
+  - Scenarios: SCENARIOS.md
+  - API: API.md
+  - Contributing: CONTRIBUTING.md
+  - Study Template: STUDY_TEMPLATE.md
+
+docs_dir: docs
+site_dir: site

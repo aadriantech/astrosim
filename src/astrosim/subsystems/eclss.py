@@ -35,9 +35,10 @@ class ECLSSSubsystem(Subsystem):
         food_net_import = max(0.0, food_consumed - food_supplied)
         waste_generated = crew * waste_kg_per_person_day * days
 
+        water_supplied = state.metrics.get("isru.water_produced_kg", 0.0)
         water_recovered = water_consumed * water_recovery_rate
         waste_recycled = waste_generated * waste_recovery_rate
-        water_net = water_consumed - water_recovered
+        water_net = max(0.0, water_consumed - water_recovered - water_supplied)
         waste_net = waste_generated - waste_recycled
         co2_ppm += crew * 50.0 * days
 
@@ -47,6 +48,7 @@ class ECLSSSubsystem(Subsystem):
             "o2_consumed_kg": o2_consumed,
             "water_consumed_kg": water_consumed,
             "water_recovered_kg": water_recovered,
+            "water_supplied_kg": water_supplied,
             "water_net_kg": water_net,
             "food_consumed_kg": food_consumed,
             "food_supplied_kg": food_supplied,

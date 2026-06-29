@@ -37,3 +37,6 @@ jobs:
         run: |
           bash scripts/smoke_custom_subsystem.sh
           bash scripts/smoke_mars_quick.sh
+
+      - name: Build wheel smoke
+        run: bash scripts/smoke_wheel.sh

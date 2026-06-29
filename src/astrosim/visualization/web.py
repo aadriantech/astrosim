@@ -9,9 +9,20 @@ from astrosim.engine.simulator import SimulationResult
 from astrosim.visualization.dashboard import result_to_dataframe
 
 
-def render_web_dashboard(result: SimulationResult, output_path: str | Path) -> Path:
+def render_web_dashboard(
+    result: SimulationResult,
+    output_path: str | Path,
+    *,
+    study_report_path: str | Path | None = None,
+) -> Path:
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
+
+    study_meta: dict | None = None
+    if study_report_path is not None:
+        sidecar = Path(study_report_path)
+        if sidecar.exists():
+            study_meta = json.loads(sidecar.read_text())
 
     df = result_to_dataframe(result)
     energy = result.energy_budget.summary() if result.energy_budget else {}
@@ -31,7 +42,19 @@ def render_web_dashboard(result: SimulationResult, output_path: str | Path) -> P
         "power_stored": _series("power.stored_kwh"),
         "eclss_water_net": _series("eclss.water_net_kg"),
         "thermal_heat_load": _series("thermal.heat_load_kw"),
+        "greenhouse_food_supplied": _series("greenhouse.food_supplied_kg"),
+        "eclss_food_net_import": _series("eclss.food_net_import_kg"),
     }
+
+    repro_block = ""
+    if study_meta:
+        repro_cmd = study_meta.get("reproducibility_command", "")
+        repro_block = f"""
+  <div class="card" style="margin-top:1.5rem; grid-column: 1 / -1;">
+    <div class="label">Study Report</div>
+    <div class="value" style="font-size:1rem;">{study_meta.get('title', result.config.name)}</div>
+    <pre style="margin-top:0.75rem; color:#8b95b0; white-space:pre-wrap;">{repro_cmd}</pre>
+  </div>"""
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -57,9 +80,11 @@ def render_web_dashboard(result: SimulationResult, output_path: str | Path) -> P
     <div class="card"><div class="label">Mass Net Import (kg)</div><div class="value">{mass.get('net_import_kg', 0):.1f}</div></div>
     <div class="card"><div class="label">Mission Success</div><div class="value">{reliability.get('mission_success_probability', 0):.4f}</div></div>
     <div class="card"><div class="label">Timesteps</div><div class="value">{len(result.history)}</div></div>
+    {repro_block}
   </div>
   <canvas id="power-chart" width="900" height="320"></canvas>
   <canvas id="subsystem-chart" width="900" height="320"></canvas>
+  <canvas id="food-chart" width="900" height="320"></canvas>
   <script>
     const data = {json.dumps(chart_data)};
     function drawChart(canvasId, title, seriesList) {{
@@ -93,6 +118,12 @@ def render_web_dashboard(result: SimulationResult, output_path: str | Path) -> P
       {{ label: 'Water Net (kg)', color: '#f0a060', values: data.eclss_water_net }},
       {{ label: 'Heat Load (kW)', color: '#d47eb8', values: data.thermal_heat_load }},
     ]);
+    if (data.greenhouse_food_supplied.length || data.eclss_food_net_import.length) {{
+      drawChart('food-chart', 'Food Loop', [
+        {{ label: 'Food Supplied (kg)', color: '#8fd47e', values: data.greenhouse_food_supplied }},
+        {{ label: 'Food Net Import (kg)', color: '#e8c060', values: data.eclss_food_net_import }},
+      ]);
+    }}
   </script>
 </body>
 </html>"""

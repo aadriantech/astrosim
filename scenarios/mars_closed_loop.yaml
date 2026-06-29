@@ -1,0 +1,47 @@
+name: Mars Closed Loop Habitat
+location: mars
+description: >
+  Integrated Mars habitat with greenhouse food, ISRU water/O2, and full ECLSS.
+
+simulation:
+  duration_hours: 168
+  timestep_hours: 6
+  crew_count: 6
+
+subsystems:
+  - power
+  - greenhouse
+  - isru
+  - eclss
+  - thermal
+  - structure
+
+parameters:
+  solar_array_kw: 140
+  solar_capacity_factor: 0.22
+  battery_kwh: 700
+  base_load_kw: 30
+  growth_rate_kg_per_hour: 0.14
+  crew_tending_bonus: 0.015
+  food_yield_fraction: 0.78
+  greenhouse_power_kw: 3.5
+  regolith_throughput_kg_h: 70
+  o2_extraction_yield: 0.022
+  water_extraction_yield: 0.009
+  isru_power_kw: 16
+  regolith_quality: 0.92
+  o2_kg_per_person_day: 0.84
+  water_kg_per_person_day: 3.2
+  water_recovery_rate: 0.93
+  food_kg_per_person_day: 1.8
+  waste_kg_per_person_day: 0.5
+  waste_recovery_rate: 0.72
+  eclss_power_kw: 4.5
+  ambient_temp_c: -60
+  internal_target_c: 22
+  internal_heat_kw: 12
+  radiator_efficiency: 0.86
+  pressurized_volume_m3: 200
+  hull_mass_kg: 14000
+  radiation_shield_kg: 28000
+  micrometeoroid_annual_risk: 0.001

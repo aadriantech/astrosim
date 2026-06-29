@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/suite_report.schema.json",
+  "title": "AstroSim Scenario Suite Report",
+  "type": "object",
+  "required": ["scenarios", "errors"],
+  "additionalProperties": false,
+  "properties": {
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "scenario_name",
+          "scenario_path",
+          "energy_net_kwh",
+          "mass_net_import_kg",
+          "mission_success_probability",
+          "error"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "scenario_name": { "type": "string" },
+          "scenario_path": { "type": "string" },
+          "energy_net_kwh": { "type": ["number", "null"] },
+          "mass_net_import_kg": { "type": ["number", "null"] },
+          "mission_success_probability": { "type": ["number", "null"] },
+          "error": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

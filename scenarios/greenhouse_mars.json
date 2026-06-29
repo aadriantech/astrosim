@@ -1,0 +1,43 @@
+{
+  "name": "Greenhouse Mars Habitat",
+  "location": "mars",
+  "description": "Mars surface habitat with greenhouse food production and ISRU support.\n",
+  "simulation": {
+    "duration_hours": 168,
+    "timestep_hours": 6,
+    "crew_count": 6
+  },
+  "subsystems": [
+    "power",
+    "greenhouse",
+    "eclss",
+    "isru",
+    "thermal"
+  ],
+  "parameters": {
+    "solar_array_kw": 120,
+    "solar_capacity_factor": 0.22,
+    "battery_kwh": 600,
+    "base_load_kw": 28,
+    "growth_rate_kg_per_hour": 0.12,
+    "crew_tending_bonus": 0.015,
+    "food_yield_fraction": 0.75,
+    "greenhouse_power_kw": 3.0,
+    "o2_kg_per_person_day": 0.84,
+    "water_kg_per_person_day": 3.2,
+    "water_recovery_rate": 0.92,
+    "food_kg_per_person_day": 1.8,
+    "waste_kg_per_person_day": 0.5,
+    "waste_recovery_rate": 0.7,
+    "eclss_power_kw": 4.0,
+    "ambient_temp_c": -60,
+    "internal_target_c": 22,
+    "internal_heat_kw": 12,
+    "radiator_efficiency": 0.85,
+    "regolith_throughput_kg_h": 60,
+    "o2_extraction_yield": 0.02,
+    "water_extraction_yield": 0.008,
+    "isru_power_kw": 15,
+    "regolith_quality": 0.9
+  }
+}

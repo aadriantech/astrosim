@@ -26,6 +26,16 @@ def test_parse_battery_and_duration():
     assert patch.simulation == {"duration_hours": 720.0}
 
 
+def test_parse_regolith_throughput_intent():
+    patch = parse_edit_intent("set regolith throughput to 90 kg/h")
+    assert patch.parameters == {"regolith_throughput_kg_h": 90.0}
+
+
+def test_parse_isru_power_intent():
+    patch = parse_edit_intent("set isru power to 18 kw")
+    assert patch.parameters == {"isru_power_kw": 18.0}
+
+
 def test_apply_patch_merges_simulation():
     scenario = {
         "name": "t",

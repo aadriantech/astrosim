@@ -14,7 +14,8 @@ Open-source, modular, AI-native simulation framework for modeling, analyzing, an
 - **Visualization & export**: matplotlib plots, HTML web dashboard, JSON/CSV output
 - **Plugin system**: register custom subsystems via `@register_subsystem`
 - **Sensitivity analysis**: one-at-a-time parameter sweeps
-- **Example scenarios**: lunar base and Mars habitat
+- **Example scenarios**: lunar base, Mars habitat, greenhouse & closed-loop Mars
+- **Research tools**: study reports, scenario compare/suite, trade studies
 
 ## Quick Start
 
@@ -38,6 +39,7 @@ astrosim scenarios/lunar_base.yaml --web
 | [PLUGIN_COOKBOOK.md](docs/PLUGIN_COOKBOOK.md) | Custom subsystem patterns |
 | [CONTRIBUTING.md](docs/CONTRIBUTING.md) | Human contributor guide |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |
+| [MkDocs site](docs/index.md) | Build static docs: `bash scripts/build_docs.sh` |
 | [PRD.md](docs/PRD.md) | Product requirements |
 | [SRD.md](docs/SRD.md) | System requirements |
 

@@ -3,7 +3,7 @@
 **Scope:** Matplotlib PNG + self-contained HTML dashboard.  
 **Owns:** `visualization/*.py`  
 **Depends on:** ENG  
-**Last verified:** 2026-06-29 · baseline audit
+**Last verified:** 2026-06-29 · Phase 10 dashboard v2
 
 ## Gotchas
 
@@ -14,6 +14,8 @@
 | Claim | Status |
 |-------|--------|
 | HTML dashboard renders scenario name | VERIFIED |
+| Food-loop charts when greenhouse present | VERIFIED |
+| Study report sidecar embed | VERIFIED |
 | Web ECLSS + thermal series | VERIFIED |
 | Matplotlib PNG export | VERIFIED |
 

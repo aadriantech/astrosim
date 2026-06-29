@@ -88,6 +88,22 @@ def build_parser() -> argparse.ArgumentParser:
         default=["energy.net_kwh", "mass.net_import_kg", "reliability.success"],
         help="Metrics for --compare",
     )
+    parser.add_argument(
+        "--suite",
+        action="store_true",
+        help="Run canonical scenario suite and write suite_report.json",
+    )
+    parser.add_argument(
+        "--insights-json",
+        action="store_true",
+        help="Write structured LLM insight JSON (offline) to output dir",
+    )
+    parser.add_argument(
+        "--compare-mc",
+        type=int,
+        metavar="N",
+        help="Monte Carlo runs per scenario when using --compare",
+    )
     return parser
 
 
@@ -113,9 +129,7 @@ def run_from_args(args: argparse.Namespace) -> Path:
     export_csv(result, out / f"{name}.csv")
     if not args.no_plot:
         plot_dashboard(result, out / f"{name}_dashboard.png")
-    if args.web:
-        render_web_dashboard(result, out / f"{name}_dashboard.html")
-
+    study_json_path: Path | None = None
     if args.report:
         from astrosim.export.study_report import render_study_report
 
@@ -124,7 +138,15 @@ def run_from_args(args: argparse.Namespace) -> Path:
             output_path=out / "study_report.md",
             scenario_path=str(args.scenario),
         )
+        study_json_path = report_path.with_suffix(".json")
         print(f"Study report: {report_path.resolve()}")
+
+    if args.web:
+        render_web_dashboard(
+            result,
+            out / f"{name}_dashboard.html",
+            study_report_path=study_json_path,
+        )
 
     hooks = AIHooks()
     insights = hooks.generate_insights(InsightRequest(result=result))
@@ -139,6 +161,12 @@ def run_from_args(args: argparse.Namespace) -> Path:
                 f"{suggestion.current_value} -> {suggestion.suggested_value} "
                 f"({suggestion.rationale})"
             )
+
+    if args.insights_json:
+        from astrosim.ai.insights import export_insight_json
+
+        insight_path = export_insight_json(result, out / f"{name}_insight.json")
+        print(f"Insight JSON: {insight_path.resolve()}")
 
     if args.monte_carlo:
         mc_result = MonteCarloRunner(
@@ -203,14 +231,38 @@ def handle_ask(
     print(json.dumps({"dry_run": True, "patch": patch.__dict__, "scenario": updated}, indent=2))
 
 
-def handle_compare(paths: list[Path], metrics: list[str], output_dir: Path) -> None:
+def handle_suite(output_dir: Path) -> None:
+    from astrosim.analysis.suite import export_suite_json, run_scenario_suite
+
+    scenarios_dir = Path(__file__).resolve().parent.parent.parent / "scenarios"
+    result = run_scenario_suite(scenarios_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = export_suite_json(result, output_dir / "suite_report.json")
+    ok = sum(1 for row in result.rows if row.error is None)
+    print(f"Suite: {ok}/{len(result.rows)} scenarios OK")
+    print(f"Written to {path.resolve()}")
+
+
+def handle_compare(
+    paths: list[Path],
+    metrics: list[str],
+    output_dir: Path,
+    *,
+    monte_carlo_runs: int | None = None,
+    seed: int | None = None,
+) -> None:
     from astrosim.analysis.compare import (
         compare_scenarios,
         export_compare_csv,
         format_compare_table,
     )
 
-    result = compare_scenarios(paths, metrics)
+    result = compare_scenarios(
+        paths,
+        metrics,
+        monte_carlo_runs=monte_carlo_runs,
+        seed=seed,
+    )
     print(format_compare_table(result))
     for err in result.errors:
         print(f"WARN: {err}", file=sys.stderr)
@@ -221,8 +273,17 @@ def handle_compare(paths: list[Path], metrics: list[str], output_dir: Path) -> N
 
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
+    if args.suite:
+        handle_suite(args.output_dir)
+        return
     if args.compare:
-        handle_compare(args.compare, args.metrics, args.output_dir)
+        handle_compare(
+            args.compare,
+            args.metrics,
+            args.output_dir,
+            monte_carlo_runs=args.compare_mc,
+            seed=args.seed,
+        )
         return
     if args.ask:
         if args.scenario is None:

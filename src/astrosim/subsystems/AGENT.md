@@ -21,6 +21,7 @@ Seven built-ins: power, eclss, thermal, structure, isru, compute, greenhouse. Re
 |-------|--------|
 | All seven have unit tests | VERIFIED |
 | ECLSS credits greenhouse food supply | VERIFIED — `tests/test_eclss_food_loop.py` |
+| ECLSS credits ISRU water supply | VERIFIED — `tests/test_isru_eclss_water_loop.py` |
 | Plugin register + build | VERIFIED |
 | Output key contracts | VERIFIED — `contracts/subsystem_outputs.yaml` + `tests/test_contracts_subsystems.py` |
 

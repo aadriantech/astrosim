@@ -13,6 +13,7 @@ eclss:
     - o2_consumed_kg
     - water_consumed_kg
     - water_recovered_kg
+    - water_supplied_kg
     - water_net_kg
     - food_consumed_kg
     - food_supplied_kg

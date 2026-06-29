@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
+from statistics import mean, pstdev
 
 import pandas as pd
 
+from astrosim.engine.monte_carlo import MonteCarloRunner
 from astrosim.engine.simulator import SimulationResult
-from astrosim.scenario import load_and_build, load_scenario
+from astrosim.scenario import build_simulator, load_and_build, load_scenario
 
 
 def _resolve_metric(sim_result: SimulationResult, metric: str) -> float | None:
@@ -32,12 +34,37 @@ class CompareResult:
     errors: list[str] = field(default_factory=list)
 
 
+def _mc_metric_stats(
+    config,
+    metric: str,
+    *,
+    monte_carlo_runs: int,
+    seed: int | None,
+) -> tuple[float | None, float | None]:
+    config.duration_hours = min(config.duration_hours, 48)
+    mc = MonteCarloRunner(config, build_simulator, seed=seed).run(num_runs=monte_carlo_runs)
+    values = [_resolve_metric(run, metric) for run in mc.runs]
+    values = [v for v in values if v is not None]
+    if not values:
+        return None, None
+    if len(values) == 1:
+        return values[0], 0.0
+    return mean(values), pstdev(values)
+
+
 def compare_scenarios(
     paths: list[str | Path],
     metrics: list[str],
+    *,
+    monte_carlo_runs: int | None = None,
+    seed: int | None = None,
 ) -> CompareResult:
     """Run scenarios and collect final-step metric values."""
-    result = CompareResult(metrics=metrics)
+    columns = list(metrics)
+    if monte_carlo_runs:
+        for metric in metrics:
+            columns.extend([f"{metric}_mean", f"{metric}_std"])
+    result = CompareResult(metrics=columns)
     for path in paths:
         scenario_path = Path(path)
         try:
@@ -46,6 +73,15 @@ def compare_scenarios(
             row: dict[str, str | float | None] = {"scenario_name": config.name}
             for metric in metrics:
                 row[metric] = _resolve_metric(sim_result, metric)
+                if monte_carlo_runs:
+                    m, s = _mc_metric_stats(
+                        load_scenario(scenario_path),
+                        metric,
+                        monte_carlo_runs=monte_carlo_runs,
+                        seed=seed,
+                    )
+                    row[f"{metric}_mean"] = m
+                    row[f"{metric}_std"] = s
             result.rows.append(row)
         except Exception as exc:  # noqa: BLE001 — collect per-scenario errors
             result.errors.append(f"{scenario_path}: {exc}")

@@ -63,6 +63,11 @@ def test_greenhouse_lunar_json_validates_against_scenario_schema():
     jsonschema.validate(data, _load_schema())
 
 
+def test_mars_closed_loop_yaml_validates_against_scenario_schema():
+    data = _load_scenario_dict(ROOT / "scenarios" / "mars_closed_loop.yaml")
+    jsonschema.validate(data, _load_schema())
+
+
 def test_event_with_empty_payload_is_valid():
     data = {
         "name": "evt",

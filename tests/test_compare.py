@@ -55,3 +55,17 @@ def test_compare_resolves_budget_metrics():
     result = compare_scenarios(paths, ["energy.net_kwh", "mass.net_import_kg"])
     assert result.rows[0]["energy.net_kwh"] is not None
     assert result.rows[0]["mass.net_import_kg"] is not None
+
+
+def test_compare_monte_carlo_adds_mean_std():
+    paths = [ROOT / "scenarios" / "greenhouse_lunar.yaml"]
+    result = compare_scenarios(
+        paths,
+        ["reliability.success"],
+        monte_carlo_runs=3,
+        seed=1,
+    )
+    row = result.rows[0]
+    assert "reliability.success_mean" in row
+    assert "reliability.success_std" in row
+    assert row["reliability.success_mean"] is not None

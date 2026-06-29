@@ -28,6 +28,16 @@ SCENARIO_PAIRS = [
         ROOT / "scenarios" / "greenhouse_lunar.yaml",
         ROOT / "scenarios" / "greenhouse_lunar.json",
     ),
+    (
+        "greenhouse_mars",
+        ROOT / "scenarios" / "greenhouse_mars.yaml",
+        ROOT / "scenarios" / "greenhouse_mars.json",
+    ),
+    (
+        "mars_closed_loop",
+        ROOT / "scenarios" / "mars_closed_loop.yaml",
+        ROOT / "scenarios" / "mars_closed_loop.json",
+    ),
 ]
 
 

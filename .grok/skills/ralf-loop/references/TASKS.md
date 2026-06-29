@@ -412,10 +412,46 @@
 
 ---
 
+## Phase 10 — Docs Site & Interactive Dashboard (v0.6.0)
+
+**Master plan:** `docs/plans/epic-phase10.md`
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 10.1.1.1 | Wheel build CI smoke | `scripts/smoke_wheel.sh` in CI | ✅ |
+| 10.2.1.1 | MkDocs site | `scripts/build_docs.sh` green | ✅ |
+| 10.3.1.1 | Dashboard v2 | Food charts + study report embed | ✅ |
+| 10.4.1.1 | Scenario suite | `run_scenario_suite()` + `--suite` | ✅ |
+| 10.5.1.1 | greenhouse_mars | YAML + JSON parity | ✅ |
+| 10.6.1.1 | Release v0.6.0 | CHANGELOG (bundled in v0.7.0 tag) | ✅ |
+
+---
+
+## Phase 11 — Closed-Loop Resources & AI Export (v0.7.0)
+
+**Master plan:** `docs/plans/epic-phase11.md`
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 11.1.1.1 | ISRU water loop | `water_supplied_kg`; lower water_net | ✅ |
+| 11.2.1.1 | Insight JSON export | `llm_insight.schema.json` + `--insights-json` | ✅ |
+| 11.3.1.1 | MC compare | `--compare-mc N` mean/std columns | ✅ |
+| 11.4.1.1 | NL ISRU intents | regolith + isru power parse | ✅ |
+| 11.5.1.1 | mars_closed_loop | Scenario + example script | ✅ |
+| 11.6.1.1 | Release v0.7.0 | Tag + AGENT sync | ✅ |
+
+### Phase 11 exit gate
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 11.0.1 | Phase 11 AYSU | ≥170 tests target (158 shipped), ≥85% cov | ✅ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** `9.1.1.1` (PyPI publish — needs `PYPI_API_TOKEN`) · Phase 10 not planned
-- **Master plan:** `docs/plans/epic-phase9.md`
+- **Next incomplete (work order):** `9.1.1.1` / PyPI publish (`PYPI_API_TOKEN`) · Phase 12 not planned
+- **Master plan:** `docs/plans/epic-phase11.md`
 - **Integrity gate:** `bash scripts/integrity_check.sh`
 - **Push:** `bash scripts/push_github.sh` (SSH)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`

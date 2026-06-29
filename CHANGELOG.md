@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-06-29
+
+### Added (Phase 11)
+
+- ISRU–ECLSS water loop (`water_supplied_kg`, reduced `water_net_kg`)
+- Structured insight export (`ai/insights.py`) + CLI `--insights-json`
+- MC-enhanced compare (`--compare-mc N`)
+- NL editor ISRU intents (regolith throughput, isru power)
+- `mars_closed_loop` scenario + `examples/run_mars_closed_loop.py`
+
+## [0.6.0] - 2026-06-29
+
+### Added (Phase 10)
+
+- MkDocs site (`mkdocs.yml`, `scripts/build_docs.sh`, `[docs]` extra)
+- Dashboard v2: food-loop charts + study report embed
+- Scenario suite runner (`analysis/suite.py`) + CLI `--suite`
+- `greenhouse_mars` scenario
+- CI wheel build smoke (`scripts/smoke_wheel.sh`)
+- Contract: `suite_report.schema.json`
+
 ## [0.5.0] - 2026-06-29
 
 ### Added

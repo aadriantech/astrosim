@@ -14,6 +14,7 @@
 | [trade_study.schema.json](trade_study.schema.json) | Pareto trade study export | active |
 | [study_report.schema.json](study_report.schema.json) | Study report metadata sidecar | active |
 | [scenario_compare.schema.json](scenario_compare.schema.json) | Multi-scenario compare export | active |
+| [suite_report.schema.json](suite_report.schema.json) | Canonical scenario suite export | active |
 
 New interfaces: update contract first (PDD), then tests (TDD), then code.
 
