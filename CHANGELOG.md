@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-29
+
+### Added (Phase 15)
+
+- Dynamic `__version__` from package metadata (matches `pyproject.toml`)
+- CLI `--version` flag
+- Parallel scenario suite (`run_scenario_suite(..., parallel=True)`)
+- Expanded canonical suite (8 scenarios incl. mars_closed_loop, orbital_greenhouse)
+- `CITATION.cff` for academic citation
+- `docs/studies/mars_closed_loop_study.md`
+
 ## [1.0.0] - 2026-06-29
 
 ### Added (Phase 14)

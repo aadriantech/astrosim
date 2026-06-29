@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: AstroSim
+message: If you use this software, please cite it as below.
+type: software
+authors:
+  - name: aadriantech
+repository-code: https://github.com/aadriantech/astrosim
+url: https://github.com/aadriantech/astrosim
+license: MIT
+version: 1.1.0
+date-released: 2026-06-29
+keywords:
+  - space
+  - simulation
+  - habitat
+  - life-support
+  - monte-carlo
+preferred-citation:
+  type: software
+  title: "AstroSim: Open-source space habitat simulation framework"
+  authors:
+    - name: aadriantech
+  year: 2026
+  url: https://github.com/aadriantech/astrosim
+  version: 1.1.0

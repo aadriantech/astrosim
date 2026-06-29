@@ -20,6 +20,16 @@ def test_output_stem_normalizes_spaces():
     assert output_stem("Lunar Base Alpha") == "lunar_base_alpha"
 
 
+def test_parse_args_version(capsys):
+    with pytest.raises(SystemExit) as exc:
+        parse_args(["--version"])
+    assert exc.value.code == 0
+    captured = capsys.readouterr()
+    import astrosim
+
+    assert astrosim.__version__ in captured.out
+
+
 def test_parse_args_defaults():
     args = parse_args(["scenarios/lunar_base.yaml"])
     assert args.scenario == Path("scenarios/lunar_base.yaml")

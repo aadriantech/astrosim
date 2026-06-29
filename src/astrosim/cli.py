@@ -16,7 +16,14 @@ from astrosim.visualization.web import render_web_dashboard
 
 
 def build_parser() -> argparse.ArgumentParser:
+    from astrosim import __version__
+
     parser = argparse.ArgumentParser(description="AstroSim habitat simulator")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
     parser.add_argument(
         "scenario",
         type=Path,

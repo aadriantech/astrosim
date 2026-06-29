@@ -1,6 +1,6 @@
 # AstroSim Roadmap
 
-**Status:** Phases 1–14 complete · **v1.0.0** (2026-06-29)
+**Status:** Phases 1–15 in progress · **v1.1.0** (2026-06-29)
 
 ## Completed phases
 
@@ -16,6 +16,7 @@
 | 12 | PyPI-ready, GitHub Pages docs, example study | 0.8.0 |
 | 13 | O₂ closed-loop, orbital greenhouse | 0.9.0 |
 | 14 | v1.0.0 project completion | 1.0.0 |
+| 15 | Post-1.0 community & performance | 1.1.0 |
 
 ## PRD success metrics
 

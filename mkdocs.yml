@@ -19,6 +19,7 @@ nav:
   - Contributing: CONTRIBUTING.md
   - Study Template: STUDY_TEMPLATE.md
   - Example Study: studies/lunar_energy_trade.md
+  - Mars Closed Loop: studies/mars_closed_loop_study.md
 
 docs_dir: docs
 site_dir: site

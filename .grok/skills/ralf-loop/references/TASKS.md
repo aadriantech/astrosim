@@ -493,10 +493,26 @@
 
 ---
 
+## Phase 15 — Post-1.0 Community & Performance (v1.1.0)
+
+**Master plan:** `docs/plans/epic-phase15.md`
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 15.1.1.1 | Dynamic version | `__version__` matches pyproject | ✅ |
+| 15.2.1.1 | Expanded suite | 8 canonical scenarios | ✅ |
+| 15.3.1.1 | Parallel suite | `parallel=True` matches sequential | ✅ |
+| 15.4.1.1 | CITATION.cff | Academic citation file | ✅ |
+| 15.5.1.1 | CLI --version | Version flag | ✅ |
+| 15.6.1.1 | Mars study doc | `mars_closed_loop_study.md` | ✅ |
+| 15.7.1.1 | Release v1.1.0 | Tag + CHANGELOG | ✅ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** none — **all phases complete** (v1.0.0)
-- **Master plan:** `docs/ROADMAP.md`
+- **Next incomplete (work order):** none — phases 1–15 complete (v1.1.0)
+- **Master plan:** `docs/plans/epic-phase15.md`
 - **Integrity gate:** `bash scripts/integrity_check.sh`
 - **Push:** `bash scripts/push_github.sh` (SSH)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`
