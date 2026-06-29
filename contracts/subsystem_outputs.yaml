@@ -1,0 +1,54 @@
+# Required keys returned by Subsystem.update() / step() per built-in subsystem.
+# Extra keys are allowed; contract tests assert only this manifest.
+
+power:
+  required_keys:
+    - generated_kwh
+    - consumed_kwh
+    - stored_kwh
+    - load_kw
+
+eclss:
+  required_keys:
+    - o2_consumed_kg
+    - water_consumed_kg
+    - water_recovered_kg
+    - water_net_kg
+    - food_consumed_kg
+    - waste_generated_kg
+    - waste_recycled_kg
+    - waste_net_kg
+    - co2_ppm
+    - power_kw
+
+thermal:
+  required_keys:
+    - heat_load_kw
+    - rejection_kw
+    - pump_power_kw
+    - delta_t_c
+
+structure:
+  required_keys:
+    - pressurized_volume_m3
+    - total_mass_kg
+    - micrometeoroid_step_risk
+    - micrometeoroid_cumulative_risk
+    - utilization
+
+isru:
+  required_keys:
+    - regolith_processed_kg
+    - o2_produced_kg
+    - water_produced_kg
+    - power_kw
+
+compute:
+  required_keys:
+    - power_kw
+    - jobs_completed
+    - active_nodes
+    - ai_utilization
+    - dose_sv_step
+    - cumulative_dose_sv
+    - bit_error_rate

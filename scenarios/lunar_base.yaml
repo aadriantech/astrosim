@@ -1,0 +1,52 @@
+name: Lunar Base Alpha
+location: lunar
+description: >
+  Small crewed lunar outpost with solar power, basic ECLSS, and ISRU oxygen
+  extraction from regolith.
+
+simulation:
+  duration_hours: 720
+  timestep_hours: 6
+  crew_count: 4
+
+events:
+  - time_hours: 168
+    name: crew_rotation
+    payload:
+      alert: 1
+  - time_hours: 336
+    name: isru_ramp_up
+    payload:
+      boost: 1
+
+parameters:
+  solar_array_kw: 80
+  solar_capacity_factor: 0.28
+  battery_kwh: 400
+  base_load_kw: 20
+  o2_kg_per_person_day: 0.84
+  water_kg_per_person_day: 3.0
+  water_recovery_rate: 0.94
+  food_kg_per_person_day: 1.8
+  waste_kg_per_person_day: 0.5
+  waste_recovery_rate: 0.75
+  eclss_power_kw: 3.0
+  ambient_temp_c: -20
+  internal_target_c: 22
+  internal_heat_kw: 8
+  radiator_efficiency: 0.88
+  pressurized_volume_m3: 150
+  hull_mass_kg: 10000
+  radiation_shield_kg: 15000
+  micrometeoroid_annual_risk: 0.0008
+  max_crew: 6
+  regolith_throughput_kg_h: 80
+  o2_extraction_yield: 0.025
+  water_extraction_yield: 0.006
+  isru_power_kw: 12
+  compute_nodes: 6
+  watts_per_node: 150
+  ai_utilization: 0.5
+  inference_jobs_per_hour: 200
+  radiation_sv_per_year: 0.35
+  compute_shielding_factor: 0.75

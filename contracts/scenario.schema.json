@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/scenario.schema.json",
+  "title": "AstroSim Scenario",
+  "description": "YAML/JSON mission definition consumed by config_from_dict.",
+  "type": "object",
+  "required": ["name", "location", "simulation"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "simulation": {
+      "type": "object",
+      "required": ["duration_hours", "timestep_hours", "crew_count"],
+      "additionalProperties": false,
+      "properties": {
+        "duration_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "timestep_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "crew_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["time_hours", "name"],
+        "additionalProperties": false,
+        "properties": {
+          "time_hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "subsystems": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

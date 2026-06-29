@@ -1,0 +1,19 @@
+# Event catalog: handler semantics for scenario-declared events.
+# Unknown event names are allowed in scenarios; only listed events are contract-tested.
+
+events:
+  isru_ramp_up:
+    handler: active
+    description: >
+      Multiplies regolith_throughput_kg_h by 1 + 0.5*boost from payload;
+      sets isru_ramp_active in parameters and event.* flags from payload.
+
+  crew_rotation:
+    handler: noop
+    description: >
+      Sets event.* flags from payload only; no parameter mutation.
+
+  dust_storm:
+    handler: noop
+    description: >
+      Sets event.* flags from payload only; no parameter mutation.

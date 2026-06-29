@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/export_result.schema.json",
+  "title": "AstroSim Export Result",
+  "description": "JSON payload written by export_json() — config, budget summaries, timestep history.",
+  "type": "object",
+  "required": ["config", "energy", "mass", "reliability", "history"],
+  "additionalProperties": false,
+  "properties": {
+    "config": {
+      "type": "object",
+      "required": [
+        "name",
+        "duration_hours",
+        "timestep_hours",
+        "crew_count",
+        "location",
+        "parameters"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "timestep_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "crew_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["number", "string", "boolean"]
+          }
+        }
+      }
+    },
+    "energy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "maxProperties": 0
+        },
+        {
+          "type": "object",
+          "required": ["generated_kwh", "consumed_kwh", "net_kwh"],
+          "additionalProperties": false,
+          "properties": {
+            "generated_kwh": { "type": "number" },
+            "consumed_kwh": { "type": "number" },
+            "net_kwh": { "type": "number" }
+          }
+        }
+      ]
+    },
+    "mass": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "maxProperties": 0
+        },
+        {
+          "type": "object",
+          "required": [
+            "imported_kg",
+            "produced_kg",
+            "consumed_kg",
+            "net_import_kg"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "imported_kg": { "type": "number" },
+            "produced_kg": { "type": "number" },
+            "consumed_kg": { "type": "number" },
+            "net_import_kg": { "type": "number" }
+          }
+        }
+      ]
+    },
+    "reliability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "maxProperties": 0
+        },
+        {
+          "type": "object",
+          "required": ["mission_success_probability"],
+          "additionalProperties": false,
+          "properties": {
+            "mission_success_probability": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "patternProperties": {
+            "^risk_[a-z0-9_]+$": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "time_hours",
+          "step",
+          "mass_kg",
+          "reliability.cumulative_risk",
+          "reliability.success_probability"
+        ],
+        "properties": {
+          "time_hours": { "type": "number", "minimum": 0 },
+          "step": { "type": "integer", "minimum": 0 },
+          "mass_kg": { "type": "number" },
+          "reliability.cumulative_risk": { "type": "number", "minimum": 0 },
+          "reliability.success_probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "additionalProperties": { "type": "number" }
+      }
+    }
+  }
+}
