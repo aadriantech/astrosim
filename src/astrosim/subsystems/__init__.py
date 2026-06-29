@@ -1,6 +1,7 @@
 from astrosim.subsystems.base import Subsystem
 from astrosim.subsystems.compute import ComputeSubsystem
 from astrosim.subsystems.eclss import ECLSSSubsystem
+from astrosim.subsystems.greenhouse import GreenhouseSubsystem
 from astrosim.subsystems.isru import ISRUSubsystem
 from astrosim.subsystems.power import PowerSubsystem
 from astrosim.subsystems.registry import (
@@ -19,6 +20,7 @@ __all__ = [
     "ComputeSubsystem",
     "DEFAULT_SUBSYSTEMS",
     "ECLSSSubsystem",
+    "GreenhouseSubsystem",
     "ISRUSubsystem",
     "PowerSubsystem",
     "StructureSubsystem",

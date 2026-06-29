@@ -9,6 +9,7 @@ import yaml
 from astrosim.engine.state import SimulationState
 from astrosim.subsystems.compute import ComputeSubsystem
 from astrosim.subsystems.eclss import ECLSSSubsystem
+from astrosim.subsystems.greenhouse import GreenhouseSubsystem
 from astrosim.subsystems.isru import ISRUSubsystem
 from astrosim.subsystems.power import PowerSubsystem
 from astrosim.subsystems.structure import StructureSubsystem
@@ -24,6 +25,7 @@ SUBSYSTEMS = {
     "structure": StructureSubsystem,
     "isru": ISRUSubsystem,
     "compute": ComputeSubsystem,
+    "greenhouse": GreenhouseSubsystem,
 }
 
 

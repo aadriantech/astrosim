@@ -31,6 +31,8 @@ class ECLSSSubsystem(Subsystem):
         o2_consumed = crew * o2_kg_per_person_day * days
         water_consumed = crew * water_kg_per_person_day * days
         food_consumed = crew * food_kg_per_person_day * days
+        food_supplied = state.metrics.get("greenhouse.food_supplied_kg", 0.0)
+        food_net_import = max(0.0, food_consumed - food_supplied)
         waste_generated = crew * waste_kg_per_person_day * days
 
         water_recovered = water_consumed * water_recovery_rate
@@ -39,7 +41,7 @@ class ECLSSSubsystem(Subsystem):
         waste_net = waste_generated - waste_recycled
         co2_ppm += crew * 50.0 * days
 
-        state.mass_kg += water_net + food_consumed - waste_recycled
+        state.mass_kg += water_net + food_net_import - waste_recycled
 
         return {
             "o2_consumed_kg": o2_consumed,
@@ -47,6 +49,8 @@ class ECLSSSubsystem(Subsystem):
             "water_recovered_kg": water_recovered,
             "water_net_kg": water_net,
             "food_consumed_kg": food_consumed,
+            "food_supplied_kg": food_supplied,
+            "food_net_import_kg": food_net_import,
             "waste_generated_kg": waste_generated,
             "waste_recycled_kg": waste_recycled,
             "waste_net_kg": waste_net,

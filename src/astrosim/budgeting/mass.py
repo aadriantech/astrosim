@@ -17,10 +17,15 @@ class MassBudget:
             outputs.get("o2_produced_kg", 0.0)
             + outputs.get("water_produced_kg", 0.0)
         )
+        food_mass = (
+            outputs["food_net_import_kg"]
+            if "food_net_import_kg" in outputs
+            else outputs.get("food_consumed_kg", 0.0)
+        )
         consumed = (
             outputs.get("o2_consumed_kg", 0.0)
             + outputs.get("water_net_kg", 0.0)
-            + outputs.get("food_consumed_kg", 0.0)
+            + food_mass
             + outputs.get("waste_net_kg", 0.0)
         )
         self.produced_kg += produced

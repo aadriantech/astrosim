@@ -1,6 +1,13 @@
 """Tests for NL scenario editor (offline)."""
 
+from pathlib import Path
+
+import pytest
+
 from astrosim.ai.scenario_editor import apply_patch, parse_edit_intent
+from astrosim.cli import handle_ask
+
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def test_parse_crew_count_intent():
@@ -30,3 +37,21 @@ def test_apply_patch_merges_simulation():
     updated = apply_patch(scenario, patch)
     assert updated["simulation"]["crew_count"] == 6
     assert updated["simulation"]["duration_hours"] == 24
+
+
+def test_handle_ask_write_creates_patched_file(tmp_path):
+    src = tmp_path / "demo.yaml"
+    src.write_text((ROOT / "scenarios" / "lunar_base.yaml").read_text())
+    out = tmp_path / "demo.patched.yaml"
+    handle_ask(src, "set crew count to 6", write=True, output=out)
+    assert out.exists()
+    assert "crew_count: 6" in out.read_text()
+
+
+def test_handle_ask_write_refuses_overwrite(tmp_path):
+    src = tmp_path / "demo.yaml"
+    src.write_text((ROOT / "scenarios" / "lunar_base.yaml").read_text())
+    out = tmp_path / "demo.patched.yaml"
+    out.write_text("existing")
+    with pytest.raises(SystemExit):
+        handle_ask(src, "set crew count to 6", write=True, output=out, force=False)

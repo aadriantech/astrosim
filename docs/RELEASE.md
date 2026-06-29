@@ -51,6 +51,32 @@ Pushing a `v*` tag triggers `.github/workflows/release.yml` (GitHub Release note
 2. Confirm latest `CI` workflow is green
 3. Confirm `Release` workflow completed for the tag
 
-## PyPI (optional, Phase 6.7)
+## PyPI (Phase 9.1)
 
-See `.github/workflows/publish.yml` — manual `workflow_dispatch` with `PYPI_API_TOKEN` secret.
+1. Create API token at https://pypi.org/manage/account/token/ (scope: entire account or project `astrosim`).
+2. Add GitHub repository secret `PYPI_API_TOKEN` (Settings → Secrets → Actions).
+3. Trigger publish workflow:
+
+```bash
+gh workflow run publish.yml --repo aadriantech/astrosim
+```
+
+4. Verify install:
+
+```bash
+python3 -m venv /tmp/astrosim-pypi-test
+/tmp/astrosim-pypi-test/bin/pip install astrosim==0.5.0
+/tmp/astrosim-pypi-test/bin/astrosim --help
+```
+
+**TestPyPI fallback** (no production token):
+
+```bash
+pip install build twine
+python3 -m build
+TWINE_USERNAME=__token__ TWINE_PASSWORD=<testpypi-token> \
+  twine upload --repository testpypi dist/*
+pip install -i https://test.pypi.org/simple/ astrosim==0.5.0
+```
+
+If `PYPI_API_TOKEN` is not set, Phase 9 exit gate accepts TestPyPI proof documented in release notes.

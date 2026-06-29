@@ -53,6 +53,16 @@ def test_orbital_json_validates_against_scenario_schema():
     jsonschema.validate(data, _load_schema())
 
 
+def test_greenhouse_lunar_yaml_validates_against_scenario_schema():
+    data = _load_scenario_dict(ROOT / "scenarios" / "greenhouse_lunar.yaml")
+    jsonschema.validate(data, _load_schema())
+
+
+def test_greenhouse_lunar_json_validates_against_scenario_schema():
+    data = _load_scenario_dict(ROOT / "scenarios" / "greenhouse_lunar.json")
+    jsonschema.validate(data, _load_schema())
+
+
 def test_event_with_empty_payload_is_valid():
     data = {
         "name": "evt",

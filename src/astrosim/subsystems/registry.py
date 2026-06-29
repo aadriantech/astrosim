@@ -40,6 +40,7 @@ def build_subsystems(names: list[str] | None = None) -> list[Subsystem]:
 def _register_builtin() -> None:
     from astrosim.subsystems.compute import ComputeSubsystem
     from astrosim.subsystems.eclss import ECLSSSubsystem
+    from astrosim.subsystems.greenhouse import GreenhouseSubsystem
     from astrosim.subsystems.isru import ISRUSubsystem
     from astrosim.subsystems.power import PowerSubsystem
     from astrosim.subsystems.structure import StructureSubsystem
@@ -52,6 +53,7 @@ def _register_builtin() -> None:
         StructureSubsystem,
         ISRUSubsystem,
         ComputeSubsystem,
+        GreenhouseSubsystem,
     ):
         register_subsystem(cls)
 

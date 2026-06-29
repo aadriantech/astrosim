@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/scenario_compare.schema.json",
+  "title": "AstroSim Scenario Compare Export",
+  "type": "object",
+  "required": ["metrics", "rows"],
+  "additionalProperties": false,
+  "properties": {
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scenario_name"],
+        "additionalProperties": {
+          "type": ["string", "number", "null"]
+        },
+        "properties": {
+          "scenario_name": { "type": "string" }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-06-29
+
+### Added
+
+- Built-in `GreenhouseSubsystem` with `food_supplied_kg` metric
+- ECLSS–greenhouse food loop (`food_net_import_kg`)
+- `scenarios/greenhouse_lunar.yaml` + JSON parity
+- Study report export (`export/study_report.py`) + CLI `--report`
+- Scenario compare API (`analysis/compare.py`) + CLI `--compare`
+- NL scenario editor write-back (`--ask --write`, `--force`, `--output`)
+- Contracts: `study_report.schema.json`, `scenario_compare.schema.json`
+- Examples: `run_greenhouse_lunar.py`, `run_compare.py`
+
+### Changed
+
+- `examples/custom_subsystem.py` uses built-in greenhouse + ephemeral `demo_beacon` plugin
+- Mass budget uses `food_net_import_kg` when reported by ECLSS
+- PyPI publish documented in `docs/RELEASE.md` (requires `PYPI_API_TOKEN`)
+
 ## [0.4.0] - 2026-06-28
 
 ### Added

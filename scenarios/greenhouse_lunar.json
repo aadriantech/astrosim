@@ -1,0 +1,42 @@
+{
+  "name": "Greenhouse Lunar Base",
+  "location": "lunar",
+  "description": "Lunar outpost with integrated greenhouse food production reducing ECLSS import.\n",
+  "simulation": {
+    "duration_hours": 168,
+    "timestep_hours": 6,
+    "crew_count": 4
+  },
+  "subsystems": [
+    "power",
+    "greenhouse",
+    "eclss",
+    "thermal",
+    "structure"
+  ],
+  "parameters": {
+    "solar_array_kw": 80,
+    "solar_capacity_factor": 0.28,
+    "battery_kwh": 400,
+    "base_load_kw": 20,
+    "growth_rate_kg_per_hour": 0.15,
+    "crew_tending_bonus": 0.02,
+    "food_yield_fraction": 0.8,
+    "greenhouse_power_kw": 2.0,
+    "o2_kg_per_person_day": 0.84,
+    "water_kg_per_person_day": 3.0,
+    "water_recovery_rate": 0.94,
+    "food_kg_per_person_day": 1.8,
+    "waste_kg_per_person_day": 0.5,
+    "waste_recovery_rate": 0.75,
+    "eclss_power_kw": 3.0,
+    "ambient_temp_c": -20,
+    "internal_target_c": 22,
+    "internal_heat_kw": 8,
+    "radiator_efficiency": 0.88,
+    "pressurized_volume_m3": 150,
+    "hull_mass_kg": 10000,
+    "radiation_shield_kg": 15000,
+    "micrometeoroid_annual_risk": 0.0008
+  }
+}

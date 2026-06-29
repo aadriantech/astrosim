@@ -4,7 +4,14 @@ from pathlib import Path
 
 import pytest
 
-from astrosim.cli import build_parser, handle_ask, output_stem, parse_args, run_from_args
+from astrosim.cli import (
+    build_parser,
+    handle_ask,
+    handle_compare,
+    output_stem,
+    parse_args,
+    run_from_args,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -76,3 +83,32 @@ def test_handle_ask_dry_run(capsys):
     captured = capsys.readouterr()
     assert '"dry_run": true' in captured.out
     assert '"crew_count": 8' in captured.out
+
+
+def test_run_from_args_writes_study_report(tmp_path):
+    args = parse_args(
+        [
+            str(ROOT / "scenarios" / "lunar_base.yaml"),
+            "--output-dir",
+            str(tmp_path),
+            "--no-plot",
+            "--report",
+        ]
+    )
+    run_from_args(args)
+    assert (tmp_path / "study_report.md").exists()
+    assert (tmp_path / "study_report.json").exists()
+
+
+def test_handle_compare_prints_table(capsys):
+    handle_compare(
+        [
+            ROOT / "scenarios" / "lunar_base.yaml",
+            ROOT / "scenarios" / "mars_habitat.yaml",
+        ],
+        ["energy.net_kwh"],
+        ROOT / "output" / "cli_compare_test",
+    )
+    captured = capsys.readouterr()
+    assert "scenario_name" in captured.out
+    assert "Lunar" in captured.out

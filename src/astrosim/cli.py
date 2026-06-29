@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from astrosim.ai.hooks import AIHooks, InsightRequest
@@ -19,6 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "scenario",
         type=Path,
+        nargs="?",
         help="Path to scenario YAML or JSON file",
     )
     parser.add_argument(
@@ -45,12 +47,46 @@ def build_parser() -> argparse.ArgumentParser:
         "--ask",
         type=str,
         metavar="PROMPT",
-        help="Dry-run NL scenario edit (prints YAML patch JSON, does not run sim)",
+        help="NL scenario edit (dry-run JSON unless --write)",
+    )
+    parser.add_argument(
+        "--write",
+        action="store_true",
+        help="With --ask, write patched YAML instead of dry-run JSON",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="With --ask --write, overwrite existing output file",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        metavar="PATH",
+        help="Output path for --ask --write (default: <stem>.patched.yaml)",
     )
     parser.add_argument(
         "--trade-study",
         action="store_true",
         help="Run solar vs battery Pareto trade study and write CSV",
+    )
+    parser.add_argument(
+        "--report",
+        action="store_true",
+        help="Write study_report.md (+ JSON sidecar) to output dir",
+    )
+    parser.add_argument(
+        "--compare",
+        nargs="+",
+        type=Path,
+        metavar="SCENARIO",
+        help="Compare multiple scenarios and print metric table",
+    )
+    parser.add_argument(
+        "--metrics",
+        nargs="+",
+        default=["energy.net_kwh", "mass.net_import_kg", "reliability.success"],
+        help="Metrics for --compare",
     )
     return parser
 
@@ -79,6 +115,16 @@ def run_from_args(args: argparse.Namespace) -> Path:
         plot_dashboard(result, out / f"{name}_dashboard.png")
     if args.web:
         render_web_dashboard(result, out / f"{name}_dashboard.html")
+
+    if args.report:
+        from astrosim.export.study_report import render_study_report
+
+        report_path = render_study_report(
+            result,
+            output_path=out / "study_report.md",
+            scenario_path=str(args.scenario),
+        )
+        print(f"Study report: {report_path.resolve()}")
 
     hooks = AIHooks()
     insights = hooks.generate_insights(InsightRequest(result=result))
@@ -129,7 +175,14 @@ def handle_trade_study(scenario_path: Path, output_dir: Path) -> None:
     print(f"Written to {path.resolve()}")
 
 
-def handle_ask(scenario_path: Path, prompt: str) -> None:
+def handle_ask(
+    scenario_path: Path,
+    prompt: str,
+    *,
+    write: bool = False,
+    force: bool = False,
+    output: Path | None = None,
+) -> None:
     import yaml
 
     from astrosim.ai.scenario_editor import apply_patch, parse_edit_intent
@@ -137,17 +190,61 @@ def handle_ask(scenario_path: Path, prompt: str) -> None:
     data = yaml.safe_load(scenario_path.read_text())
     patch = parse_edit_intent(prompt)
     updated = apply_patch(data, patch)
+
+    if write:
+        out_path = output or scenario_path.with_name(f"{scenario_path.stem}.patched.yaml")
+        if out_path.exists() and not force:
+            print(f"Refusing to overwrite {out_path}; use --force", file=sys.stderr)
+            raise SystemExit(1)
+        out_path.write_text(yaml.safe_dump(updated, sort_keys=False))
+        print(f"Wrote {out_path.resolve()}")
+        return
+
     print(json.dumps({"dry_run": True, "patch": patch.__dict__, "scenario": updated}, indent=2))
+
+
+def handle_compare(paths: list[Path], metrics: list[str], output_dir: Path) -> None:
+    from astrosim.analysis.compare import (
+        compare_scenarios,
+        export_compare_csv,
+        format_compare_table,
+    )
+
+    result = compare_scenarios(paths, metrics)
+    print(format_compare_table(result))
+    for err in result.errors:
+        print(f"WARN: {err}", file=sys.stderr)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    csv_path = export_compare_csv(result, output_dir / "scenario_compare.csv")
+    print(f"Compare CSV: {csv_path.resolve()}")
 
 
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
+    if args.compare:
+        handle_compare(args.compare, args.metrics, args.output_dir)
+        return
     if args.ask:
-        handle_ask(args.scenario, args.ask)
+        if args.scenario is None:
+            print("scenario file required with --ask", file=sys.stderr)
+            raise SystemExit(2)
+        handle_ask(
+            args.scenario,
+            args.ask,
+            write=args.write,
+            force=args.force,
+            output=args.output,
+        )
         return
     if args.trade_study:
+        if args.scenario is None:
+            print("scenario file required with --trade-study", file=sys.stderr)
+            raise SystemExit(2)
         handle_trade_study(args.scenario, args.output_dir)
         return
+    if args.scenario is None:
+        print("scenario file required", file=sys.stderr)
+        raise SystemExit(2)
     run_from_args(args)
 
 

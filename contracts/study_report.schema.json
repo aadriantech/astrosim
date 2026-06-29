@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/study_report.schema.json",
+  "title": "AstroSim Study Report Metadata",
+  "type": "object",
+  "required": [
+    "title",
+    "scenario_path",
+    "method",
+    "duration_hours",
+    "crew_count",
+    "location",
+    "metrics",
+    "reproducibility_command"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string" },
+    "scenario_path": { "type": "string" },
+    "method": { "type": "string" },
+    "duration_hours": { "type": "number" },
+    "crew_count": { "type": "integer" },
+    "location": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "energy_net_kwh",
+        "mass_net_import_kg",
+        "mission_success_probability"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "energy_net_kwh": { "type": ["number", "null"] },
+        "mass_net_import_kg": { "type": ["number", "null"] },
+        "mission_success_probability": { "type": ["number", "null"] }
+      }
+    },
+    "reproducibility_command": { "type": "string" }
+  }
+}

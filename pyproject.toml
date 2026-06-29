@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "astrosim"
-version = "0.4.0"
+version = "0.5.0"
 description = "Open-source simulation framework for sustainable space habitat modeling"
 readme = "README.md"
 license = "MIT"

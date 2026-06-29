@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal custom subsystem demo using @register_subsystem."""
+"""Custom subsystem plugin demo (built-in greenhouse + ephemeral beacon plugin)."""
 
 from __future__ import annotations
 
@@ -16,10 +16,10 @@ from astrosim.subsystems import (
 
 
 @register_subsystem
-class GreenhouseSubsystem(Subsystem):
-    """Simple biomass growth model for demonstration."""
+class DemoBeaconSubsystem(Subsystem):
+    """Ephemeral plugin for register/unregister smoke."""
 
-    name = "greenhouse"
+    name = "demo_beacon"
 
     def update(
         self,
@@ -27,10 +27,8 @@ class GreenhouseSubsystem(Subsystem):
         dt_hours: float,
         params: dict[str, Any],
     ) -> dict[str, float]:
-        rate = params.get("growth_rate_kg_per_hour", 0.05)
-        crew_bonus = state.crew_count * params.get("crew_tending_bonus", 0.01)
-        biomass = self._local_state.get("biomass_kg", 0.0) + (rate + crew_bonus) * dt_hours
-        return {"biomass_kg": biomass, "growth_kg": (rate + crew_bonus) * dt_hours}
+        pulses = self._local_state.get("pulses", 0.0) + 1.0
+        return {"pulses": pulses, "power_kw": params.get("beacon_power_kw", 0.1)}
 
 
 def main() -> None:
@@ -45,8 +43,9 @@ def main() -> None:
             "base_load_kw": 8,
             "growth_rate_kg_per_hour": 0.1,
             "crew_tending_bonus": 0.02,
+            "beacon_power_kw": 0.05,
         },
-        subsystems=["power", "greenhouse"],
+        subsystems=["power", "greenhouse", "demo_beacon"],
     )
 
     subsystems = build_subsystems(config.subsystems)
@@ -57,6 +56,7 @@ def main() -> None:
     print(f"Scenario: {config.name}")
     print(f"Steps: {len(result.history)}")
     print(f"Final biomass: {final.metrics.get('greenhouse.biomass_kg', 0):.2f} kg")
+    print(f"Beacon pulses: {final.metrics.get('demo_beacon.pulses', 0):.0f}")
     print(f"Registered subsystems: {config.subsystems}")
 
 
@@ -64,4 +64,4 @@ if __name__ == "__main__":
     try:
         main()
     finally:
-        unregister_subsystem("greenhouse")
+        unregister_subsystem("demo_beacon")

@@ -3,11 +3,11 @@
 **Scope:** Pluggable habitat models + registry.  
 **Owns:** `subsystems/*.py`  
 **Depends on:** ENG  
-**Last verified:** 2026-06-29 · baseline audit
+**Last verified:** 2026-06-29 · Phase 9 greenhouse + ECLSS food loop
 
 ## Purpose
 
-Six built-ins: power, eclss, thermal, structure, isru, compute. Register custom via `@register_subsystem`.
+Seven built-ins: power, eclss, thermal, structure, isru, compute, greenhouse. Register custom via `@register_subsystem`.
 
 ## Gotchas
 
@@ -19,13 +19,14 @@ Six built-ins: power, eclss, thermal, structure, isru, compute. Register custom 
 
 | Claim | Status |
 |-------|--------|
-| All six have unit tests | VERIFIED |
+| All seven have unit tests | VERIFIED |
+| ECLSS credits greenhouse food supply | VERIFIED — `tests/test_eclss_food_loop.py` |
 | Plugin register + build | VERIFIED |
 | Output key contracts | VERIFIED — `contracts/subsystem_outputs.yaml` + `tests/test_contracts_subsystems.py` |
 
 ## Tests
 
-- `tests/test_power.py`, `test_eclss.py`, `test_thermal.py`, `test_isru.py`, `test_compute.py`, `test_structure.py`, `test_subsystem_base.py`
+- `tests/test_power.py`, `test_eclss.py`, `test_thermal.py`, `test_isru.py`, `test_compute.py`, `test_structure.py`, `test_greenhouse.py`, `test_eclss_food_loop.py`, `test_subsystem_base.py`
 
 ## Related
 
