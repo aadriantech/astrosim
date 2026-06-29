@@ -275,11 +275,11 @@
 
 | ID | Task | Acceptance | Status |
 |----|------|------------|--------|
-| 6.1.1.1 | Push to GitHub | `main` on `aadriantech/astrosim` | ⬜ |
+| 6.1.1.1 | Push to GitHub | `main` on `aadriantech/astrosim` | ✅ |
 | 6.1.1.2 | Tag v0.1.0 | Annotated tag pushed | ✅ |
 | 6.1.1.3 | CHANGELOG 0.1.0 | Unreleased items promoted | ✅ |
 | 6.1.1.4 | RELEASE.md | Push/tag/verify documented | ✅ |
-| 6.1.1.5 | CI green on remote | GitHub Actions pass on main | ⬜ |
+| 6.1.1.5 | CI green on remote | GitHub Actions pass on main | ✅ |
 
 ### 6.2 Quality & Performance (T2)
 
@@ -364,7 +364,7 @@
 
 ## Quick Reference
 
-- **Next incomplete (work order):** `6.1.1.1` (GitHub push) then `7.1.1.1`
+- **Next incomplete (work order):** `6.1.1.5` (restore CI workflows) then Phase 8
 - **Master plan:** `docs/plans/epic-phase6.md` · Phase 7: `docs/plans/epic-phase7.md`
 - **Integrity gate:** `bash scripts/integrity_check.sh` (required before Phase 7)
 - **Blocked by:** GitHub credentials on host (6.1 push only)
