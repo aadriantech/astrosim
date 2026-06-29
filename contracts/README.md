@@ -15,6 +15,7 @@
 | [study_report.schema.json](study_report.schema.json) | Study report metadata sidecar | active |
 | [scenario_compare.schema.json](scenario_compare.schema.json) | Multi-scenario compare export | active |
 | [suite_report.schema.json](suite_report.schema.json) | Canonical scenario suite export | active |
+| [validation_report.schema.json](validation_report.schema.json) | Reference validation report | active |
 
 New interfaces: update contract first (PDD), then tests (TDD), then code.
 

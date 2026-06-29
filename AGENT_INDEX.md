@@ -2,7 +2,7 @@
 
 > **Read this first** to route context. Load only listed section files.
 
-**Last synced:** 2026-06-29 (Phase 15 complete · v1.1.0)  
+**Last synced:** 2026-06-29 (Phase 16 complete · v1.2.0)  
 **Sync policy:** See [AGENTS.md](AGENTS.md) · run `scripts/check_agent_sync.sh`
 
 | ID | Domain | Path | Load when… |
@@ -20,6 +20,7 @@
 | TST | Tests | [tests/AGENT.md](tests/AGENT.md) | TDD, coverage, fixtures |
 | EXM | Examples | [examples/AGENT.md](examples/AGENT.md) | Demo scripts |
 | CIC | CI/CD | [.github/AGENT.md](.github/AGENT.md) | Workflows, PR gates |
+| VAL | Reference validation | [src/astrosim/validation/AGENT.md](src/astrosim/validation/AGENT.md) | Benchmarks, `--validate` |
 | CON | Contracts | [contracts/README.md](contracts/README.md) | Schemas, CDD (secondary) |
 
 ## Load combinations
@@ -29,7 +30,8 @@
 | Engine change | ENG | TST, CON |
 | New subsystem | SUB | TST, CON, BUD |
 | Scenario/schema | SCE | CON, TST |
-| CLI / entrypoint | PKG | SCE, TST, CIC |
+| CLI / entrypoint | PKG | SCE, TST, VAL |
+| Validation / benchmarks | VAL | TST, CON, SCE |
 | AI / LLM | AI | TST, CON |
 | Release / CI | CIC | TST, ROOT |
 | Docs only | ROOT | (section if domain-specific) |

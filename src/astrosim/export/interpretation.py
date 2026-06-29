@@ -8,12 +8,65 @@ from astrosim.engine.simulator import SimulationResult
 
 
 @dataclass
+class InterpretationAction:
+    parameter: str
+    current_value: float
+    suggested_value: float
+    rationale: str
+
+
+@dataclass
 class ResultInterpretation:
     implications: list[str] = field(default_factory=list)
     verdict: str = ""
     energy_status: str = ""
     logistics_status: str = ""
     reliability_status: str = ""
+    references: list[str] = field(default_factory=list)
+    actions: list[InterpretationAction] = field(default_factory=list)
+
+
+def _build_references(params: dict) -> list[str]:
+    refs = [
+        "NASA BVAD 2.15 / OCHMO: O₂ baseline 0.84 kg crew-member-day",
+        "NASA BVAD 2.15: water ~3.0 kg CM-day (mission-dependent range 2.5–3.8)",
+        "NASA BVAD 2.15: packaged food ~1.8 kg CM-day",
+    ]
+    recovery = params.get("water_recovery_rate")
+    if recovery is not None and float(recovery) >= 0.95:
+        refs.append(
+            "ISS ECLSS: water recovery milestone ~98% (orbital closed-loop reference)"
+        )
+    return refs
+
+
+def _build_actions(result: SimulationResult) -> list[InterpretationAction]:
+    actions: list[InterpretationAction] = []
+    params = result.config.parameters
+
+    if result.energy_budget and result.energy_budget.net_kwh < 0:
+        solar = float(params.get("solar_array_kw", 50.0))
+        actions.append(
+            InterpretationAction(
+                parameter="solar_array_kw",
+                current_value=solar,
+                suggested_value=solar * 1.25,
+                rationale="Energy deficit detected; increase solar capacity.",
+            )
+        )
+
+    if result.mass_budget and result.mass_budget.net_import_kg > 0:
+        recovery = float(params.get("water_recovery_rate", 0.93))
+        actions.append(
+            InterpretationAction(
+                parameter="water_recovery_rate",
+                current_value=recovery,
+                suggested_value=min(0.99, recovery + 0.03),
+                rationale="Net mass import positive; improve ECLSS recovery.",
+            )
+        )
+
+    return actions
 
 
 def interpret_result(result: SimulationResult) -> ResultInterpretation:
@@ -21,6 +74,9 @@ def interpret_result(result: SimulationResult) -> ResultInterpretation:
     out = ResultInterpretation()
     final = result.final_state
     metrics = final.metrics if final else {}
+    params = result.config.parameters
+    out.references = _build_references(params)
+    out.actions = _build_actions(result)
 
     energy_net = result.energy_budget.net_kwh if result.energy_budget else None
     mass_net = result.mass_budget.net_import_kg if result.mass_budget else None

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-29
+
+### Added (Phase 16)
+
+- `reference/benchmarks.yaml` — NASA BVAD/OCHMO consumables + ISS orbital envelope
+- `astrosim.validation` module — parameter, derived-rate, and envelope checks
+- CLI `--validate` — writes `validation_report.json` and prints PASS/WARN/FAIL table
+- Interpretation v2 — `references`, `actions` on reports and `study_report.json`
+- Study report sections: References, Recommended Actions, Validation (with `--validate --report`)
+- `contracts/validation_report.schema.json`
+
 ## [1.1.0] - 2026-06-29
 
 ### Added (Phase 15)

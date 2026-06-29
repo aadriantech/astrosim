@@ -52,6 +52,52 @@
         "reliability": { "type": "string" }
       }
     },
-    "reproducibility_command": { "type": "string" }
+    "reproducibility_command": { "type": "string" },
+    "references": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["parameter", "current_value", "suggested_value", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "parameter": { "type": "string" },
+          "current_value": { "type": "number" },
+          "suggested_value": { "type": "number" },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["overall_status", "checks"],
+      "additionalProperties": false,
+      "properties": {
+        "overall_status": { "type": "string", "enum": ["pass", "warn", "fail"] },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "category", "status", "message", "source"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "category": {
+                "type": "string",
+                "enum": ["parameter_fidelity", "derived_rate", "envelope"]
+              },
+              "simulated": { "type": ["number", "string", "null"] },
+              "reference": { "type": "string" },
+              "status": { "type": "string", "enum": ["pass", "warn", "fail"] },
+              "message": { "type": "string" },
+              "source": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -83,6 +83,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Write study_report.md (+ JSON sidecar) to output dir",
     )
     parser.add_argument(
+        "--validate",
+        action="store_true",
+        help="Compare results to reference/benchmarks.yaml and write validation_report.json",
+    )
+    parser.add_argument(
         "--compare",
         nargs="+",
         type=Path,
@@ -137,6 +142,24 @@ def run_from_args(args: argparse.Namespace) -> Path:
     if not args.no_plot:
         plot_dashboard(result, out / f"{name}_dashboard.png")
     study_json_path: Path | None = None
+    validation_report = None
+    if args.validate:
+        from astrosim.validation.validate import (
+            export_validation_json,
+            format_validation_table,
+            validate_result,
+        )
+
+        validation_report = validate_result(
+            result,
+            scenario_path=str(args.scenario),
+        )
+        val_path = export_validation_json(validation_report, out / "validation_report.json")
+        print(format_validation_table(validation_report))
+        print(f"Validation report: {val_path.resolve()}")
+        if validation_report.overall_status == "fail":
+            raise SystemExit(1)
+
     if args.report:
         from astrosim.export.study_report import render_study_report
 
@@ -144,6 +167,7 @@ def run_from_args(args: argparse.Namespace) -> Path:
             result,
             output_path=out / "study_report.md",
             scenario_path=str(args.scenario),
+            validation=validation_report,
         )
         study_json_path = report_path.with_suffix(".json")
         print(f"Study report: {report_path.resolve()}")

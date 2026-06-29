@@ -83,3 +83,29 @@ def test_cli_prints_optimization_suggestions(tmp_path):
 
     assert result.returncode == 0, result.stderr
     assert "Optimization suggestions:" in result.stdout
+
+
+def test_cli_validate_writes_report(tmp_path):
+    scenario = ROOT / "scenarios" / "greenhouse_lunar.yaml"
+    env = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "astrosim.cli",
+            str(scenario),
+            "--output-dir",
+            str(tmp_path),
+            "--no-plot",
+            "--validate",
+        ],
+        cwd=ROOT,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert (tmp_path / "validation_report.json").exists()
+    assert "Validation:" in result.stdout

@@ -1,0 +1,36 @@
+# Official/public reference values for AstroSim validation.
+# Sources: NASA BVAD 2.15, OCHMO ECLSS brief, ISS ECLSS operations.
+
+eclss_consumables:
+  source: "NASA BVAD 2.15 / OCHMO ECLSS Technical Brief"
+  parameters:
+    o2_kg_per_person_day:
+      value: 0.84
+      tolerance_pct: 2
+    water_kg_per_person_day:
+      value: 3.0
+      tolerance_pct: 15
+    food_kg_per_person_day:
+      value: 1.8
+      tolerance_pct: 10
+
+scenario_envelopes:
+  orbital_station:
+    source: "ISS ECLSS + public ISS power data (order-of-magnitude)"
+    scenario: scenarios/orbital_station.yaml
+    metrics:
+      o2_kg_per_person_day:
+        min: 0.82
+        max: 0.86
+      water_kg_per_person_day:
+        min: 2.4
+        max: 3.2
+      water_recovery_rate:
+        min: 0.93
+        max: 0.99
+      mass_net_import_kg_per_crew_year:
+        min: 400
+        max: 2500
+      energy_net_kwh_per_year:
+        min: 50000
+        max: 150000

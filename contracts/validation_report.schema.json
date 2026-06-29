@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/validation_report.schema.json",
+  "title": "AstroSim Validation Report",
+  "type": "object",
+  "required": ["scenario_name", "checks", "overall_status"],
+  "additionalProperties": false,
+  "properties": {
+    "scenario_name": { "type": "string" },
+    "overall_status": { "type": "string", "enum": ["pass", "warn", "fail"] },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "category", "status", "message", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["parameter_fidelity", "derived_rate", "envelope"]
+          },
+          "simulated": { "type": ["number", "string", "null"] },
+          "reference": { "type": "string" },
+          "status": { "type": "string", "enum": ["pass", "warn", "fail"] },
+          "message": { "type": "string" },
+          "source": { "type": "string" }
+        }
+      }
+    }
+  }
+}
