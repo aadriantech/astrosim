@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/optimization_result.schema.json",
+  "title": "AstroSim Optimization Result",
+  "type": "object",
+  "required": [
+    "parameter",
+    "metric",
+    "optimal_value",
+    "metric_value",
+    "success",
+    "iterations",
+    "message"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "parameter": { "type": "string", "minLength": 1 },
+    "metric": { "type": "string", "minLength": 1 },
+    "optimal_value": { "type": "number" },
+    "metric_value": { "type": "number" },
+    "success": { "type": "boolean" },
+    "iterations": { "type": "integer", "minimum": 1 },
+    "message": { "type": "string" }
+  }
+}

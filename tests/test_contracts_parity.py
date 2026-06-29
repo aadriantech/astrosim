@@ -13,6 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SCENARIO_PAIRS = [
     ("lunar_base", ROOT / "scenarios" / "lunar_base.yaml", ROOT / "scenarios" / "lunar_base.json"),
     ("mars_habitat", ROOT / "scenarios" / "mars_habitat.yaml", ROOT / "scenarios" / "mars_habitat.json"),
+    (
+        "orbital_station",
+        ROOT / "scenarios" / "orbital_station.yaml",
+        ROOT / "scenarios" / "orbital_station.json",
+    ),
 ]
 
 

@@ -266,9 +266,90 @@
 
 ---
 
+## Phase 6 — Post-MVP Growth (v0.2.0)
+
+**Master plan:** `docs/plans/epic-phase6.md`  
+**Work order:** 6.1 → 6.2 → 6.3 → 6.4 → 6.5 → 6.6 → 6.7
+
+### 6.1 Release & Distribution (T3)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.1.1.1 | Push to GitHub | `main` on `aadriantech/astrosim` | ⬜ |
+| 6.1.1.2 | Tag v0.1.0 | Annotated tag pushed | ✅ |
+| 6.1.1.3 | CHANGELOG 0.1.0 | Unreleased items promoted | ✅ |
+| 6.1.1.4 | RELEASE.md | Push/tag/verify documented | ✅ |
+| 6.1.1.5 | CI green on remote | GitHub Actions pass on main | ⬜ |
+
+### 6.2 Quality & Performance (T2)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.2.1.1 | Benchmark script | `scripts/benchmark_sim.py` times 1-year sim | ✅ |
+| 6.2.1.2 | CLI unit coverage | `cli.py` ≥ 60% via extracted helpers | ✅ |
+| 6.2.1.3 | Plugin smoke isolation | `custom_subsystem` no registry pollution | ✅ |
+| 6.2.1.4 | PERFORMANCE.md | Baseline wall-time documented | ✅ |
+
+### 6.3 Event Semantics v2 (T2)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.3.1.1 | Timed dust_storm recovery | CF restores after `duration_hours` | ✅ |
+| 6.3.1.2 | crew_rotation duration | `crew_rotation_active` expires | ✅ |
+| 6.3.1.3 | events.yaml contract update | Duration semantics documented | ✅ |
+| 6.3.1.4 | Event recovery tests | Unit + integration in test_contracts_events | ✅ |
+
+### 6.4 Optimization (T2)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.4.1.1 | minimize_metric API | `analysis/optimize.py` | ✅ |
+| 6.4.1.2 | scipy optional extra | `[optimize]` in pyproject.toml | ✅ |
+| 6.4.1.3 | optimization_result schema | Contract + validation test | ✅ |
+| 6.4.1.4 | run_optimize example | Runnable demo script | ✅ |
+| 6.4.1.5 | test_optimize.py | Green in CI with optimize extra | ✅ |
+
+### 6.5 AI Integration Hardening (T2)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.5.1.1 | Mocked adapter tests | `tests/test_ai_adapters.py` | ✅ |
+| 6.5.1.2 | smoke_llm.sh | Opt-in live test, skip without key | ✅ |
+| 6.5.1.3 | adapters.py coverage | ≥ 70% | ✅ |
+| 6.5.1.4 | llm_insight schema | Planned contract active | ✅ |
+
+### 6.6 Scenarios & Examples (T2)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.6.1.1 | orbital_station scenario | YAML + JSON + schema validation | ✅ |
+| 6.6.1.2 | run_orbital_station.py | Example script + export | ✅ |
+| 6.6.1.3 | Mars quick smoke | MC num_runs=5 in < 15s CI script | ✅ |
+| 6.6.1.4 | Scenario parity tests | Orbital in test_contracts_parity | ✅ |
+
+### 6.7 Community & Packaging (T2/T3)
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.7.1.1 | Wheel/sdist build | `pip install .` in clean venv | ✅ |
+| 6.7.1.2 | PyPI workflow | publish.yml or documented manual publish | ✅ |
+| 6.7.1.3 | Tutorial | TUTORIAL.md or tutorial.ipynb | ✅ |
+| 6.7.1.4 | Plugin cookbook | PLUGIN_COOKBOOK.md | ✅ |
+| 6.7.1.5 | Release v0.2.0 | Version bump, tag, CHANGELOG | ✅ |
+
+### Phase 6 exit gate
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 6.0.1 | Phase 6 AYSU | All sub-epics ✅, ≥95 tests, ≥82% cov | ✅ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** none — MVP + Phase 5 complete
-- **Blocked by:** GitHub push (credentials on host)
+- **Next incomplete (work order):** `6.1.1.1` (GitHub push) then Phase 7
+- **Master plan:** `docs/plans/epic-phase6.md` · Phase 7: `docs/plans/epic-phase7.md`
+- **Integrity gate:** `bash scripts/integrity_check.sh` (required before Phase 7)
+- **Blocked by:** GitHub credentials on host (6.1 push only)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`
 - **Fallback verify:** `python3 -m py_compile src/astrosim/subsystems/structure.py`

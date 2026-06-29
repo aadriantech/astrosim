@@ -7,16 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-28
+
+### Added
+
+- Timed event recovery (`duration_hours`) for `dust_storm` and `crew_rotation`
+- `minimize_metric()` optimization API with `[optimize]` optional extra
+- `scenarios/orbital_station.yaml` + JSON parity
+- `scripts/integrity_check.sh` system integrity gate
+- `scripts/benchmark_sim.py`, `smoke_mars_quick.sh`, `smoke_llm.sh`
+- `tests/test_ai_adapters.py`, `tests/test_optimize.py`, `tests/test_cli_unit.py`
+- `docs/TUTORIAL.md`, `docs/PLUGIN_COOKBOOK.md`, `docs/RELEASE.md`, `docs/PERFORMANCE.md`
+- PyPI publish workflow (manual dispatch)
+
+### Changed
+
+- CLI helpers extracted for unit testing
+- `custom_subsystem.py` unregisters plugin on exit
+- CI installs `[dev,optimize]` and runs extended smokes
+
+## [0.1.1] - 2026-06-28
+
 ### Added
 
 - `scenarios/mars_habitat.json` with full YAML parity
 - Active `dust_storm` and `crew_rotation` event handlers
 - `tests/test_visualization.py` for matplotlib dashboard PNG output
-- Phase 5 contract/export CI gates and registry cleanup (see TASKS.md)
+- Phase 5 contract/export CI gates and registry cleanup
 
 ### Changed
 
-- Removed unused `scipy` dependency
+- Removed unused `scipy` from core dependencies
 - Parity tests parametrized for lunar and Mars scenarios
 
 ## [0.1.0] - 2026-06-28

@@ -11,11 +11,11 @@ events:
   crew_rotation:
     handler: active
     description: >
-      Sets crew_rotation_active; increases water_recovery_rate by 0.02 (max 0.99);
-      event.* flags set from payload in simulator.
+      Sets crew_rotation_active; increases water_recovery_rate by 0.02 (max 0.99).
+      Optional duration_hours clears crew_rotation_active when elapsed (rate not reverted).
 
   dust_storm:
     handler: active
     description: >
-      Reduces solar_capacity_factor by 0.5*severity (severity from payload or alert*0.3);
-      sets dust_storm_active; event.* flags set from payload in simulator.
+      Reduces solar_capacity_factor by 0.5*severity (severity from payload or alert*0.3).
+      Optional duration_hours restores original CF when elapsed; permanent if omitted.

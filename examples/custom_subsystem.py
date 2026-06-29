@@ -7,7 +7,12 @@ from typing import Any
 
 from astrosim.engine.state import SimulationConfig, SimulationState
 from astrosim.engine.simulator import Simulator
-from astrosim.subsystems import Subsystem, build_subsystems, register_subsystem
+from astrosim.subsystems import (
+    Subsystem,
+    build_subsystems,
+    register_subsystem,
+    unregister_subsystem,
+)
 
 
 @register_subsystem
@@ -56,4 +61,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        unregister_subsystem("greenhouse")

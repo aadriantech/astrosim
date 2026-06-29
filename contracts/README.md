@@ -9,6 +9,9 @@
 | [subsystem_outputs.yaml](subsystem_outputs.yaml) | Required output keys per subsystem | active |
 | [events.yaml](events.yaml) | Event catalog + semantics | active |
 | [export_result.schema.json](export_result.schema.json) | Simulation export JSON shape | active |
+| [optimization_result.schema.json](optimization_result.schema.json) | Optimizer output from `minimize_metric` | active |
+| [llm_insight.schema.json](llm_insight.schema.json) | Structured LLM insight response | active |
+| trade_study.schema.json | Pareto trade study export | planned (Phase 7.1) |
 
 New interfaces: update contract first (PDD), then tests (TDD), then code.
 

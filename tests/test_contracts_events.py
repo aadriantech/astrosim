@@ -8,7 +8,11 @@ from pathlib import Path
 import pytest
 import yaml
 
-from astrosim.engine.events import SimulationEvent, apply_event_payload
+from astrosim.engine.events import (
+    SimulationEvent,
+    apply_event_payload,
+    tick_event_recovery,
+)
 from astrosim.engine.state import SimulationConfig
 from astrosim.engine.simulator import Simulator
 from astrosim.subsystems import build_subsystems
@@ -63,9 +67,31 @@ def test_crew_rotation_mutates_recovery_rate():
     apply_event_payload(
         config,
         SimulationEvent(time_hours=0, name="crew_rotation", payload={"alert": 1}),
+        time_hours=0,
     )
     assert config.parameters["crew_rotation_active"] is True
     assert config.parameters["water_recovery_rate"] == 0.96
+
+
+def test_crew_rotation_expires_after_duration():
+    config = SimulationConfig(
+        name="t",
+        duration_hours=48,
+        timestep_hours=1,
+        parameters={"water_recovery_rate": 0.94},
+    )
+    apply_event_payload(
+        config,
+        SimulationEvent(
+            time_hours=0,
+            name="crew_rotation",
+            payload={"alert": 1, "duration_hours": 12},
+        ),
+        time_hours=0,
+    )
+    assert config.parameters["crew_rotation_active"] is True
+    tick_event_recovery(config, 12)
+    assert config.parameters["crew_rotation_active"] is False
 
 
 def test_dust_storm_reduces_solar_capacity_factor():
@@ -78,9 +104,32 @@ def test_dust_storm_reduces_solar_capacity_factor():
     apply_event_payload(
         config,
         SimulationEvent(time_hours=0, name="dust_storm", payload={"alert": 1}),
+        time_hours=0,
     )
     assert config.parameters["dust_storm_active"] is True
     assert config.parameters["solar_capacity_factor"] == pytest.approx(0.17)
+
+
+def test_dust_storm_recovers_after_duration():
+    config = SimulationConfig(
+        name="t",
+        duration_hours=48,
+        timestep_hours=1,
+        parameters={"solar_capacity_factor": 0.2},
+    )
+    apply_event_payload(
+        config,
+        SimulationEvent(
+            time_hours=0,
+            name="dust_storm",
+            payload={"severity": 1.0, "duration_hours": 12},
+        ),
+        time_hours=0,
+    )
+    assert config.parameters["solar_capacity_factor"] == pytest.approx(0.1)
+    tick_event_recovery(config, 12)
+    assert config.parameters["solar_capacity_factor"] == pytest.approx(0.2)
+    assert config.parameters["dust_storm_active"] is False
 
 
 def test_active_isru_ramp_up_mutates_parameters():
@@ -93,6 +142,7 @@ def test_active_isru_ramp_up_mutates_parameters():
     apply_event_payload(
         config,
         SimulationEvent(time_hours=0, name="isru_ramp_up", payload={"boost": 1}),
+        time_hours=0,
     )
     assert config.parameters["isru_ramp_active"] is True
     assert config.parameters["regolith_throughput_kg_h"] == 120.0
@@ -111,3 +161,26 @@ def test_dust_storm_reduces_power_generation_in_simulation():
     before = result.history[0].metrics["power.generated_kwh"]
     after = result.history[1].metrics["power.generated_kwh"]
     assert after < before
+
+
+def test_dust_storm_timed_recovery_restores_power():
+    config = SimulationConfig(
+        name="dust-recover",
+        duration_hours=36,
+        timestep_hours=12,
+        crew_count=0,
+        parameters={"solar_array_kw": 100, "solar_capacity_factor": 0.2, "base_load_kw": 0},
+        events=[
+            SimulationEvent(
+                time_hours=12,
+                name="dust_storm",
+                payload={"severity": 1.0, "duration_hours": 12},
+            )
+        ],
+    )
+    result = Simulator(config, build_subsystems(["power"])).run()
+    step0 = result.history[0].metrics["power.generated_kwh"]
+    step1 = result.history[1].metrics["power.generated_kwh"]
+    step2 = result.history[2].metrics["power.generated_kwh"]
+    assert step1 < step0
+    assert step2 == pytest.approx(step0)

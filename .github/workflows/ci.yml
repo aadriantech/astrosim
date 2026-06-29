@@ -22,7 +22,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: pip install -e ".[dev]"
+        run: pip install -e ".[dev,optimize]"
 
       - name: Check agent memory
         run: bash scripts/check_agent_sync.sh
@@ -32,3 +32,8 @@ jobs:
 
       - name: Smoke test examples
         run: bash scripts/smoke_examples.sh
+
+      - name: Smoke custom subsystem and mars MC
+        run: |
+          bash scripts/smoke_custom_subsystem.sh
+          bash scripts/smoke_mars_quick.sh

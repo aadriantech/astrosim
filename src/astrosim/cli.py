@@ -14,7 +14,7 @@ from astrosim.visualization.dashboard import plot_dashboard
 from astrosim.visualization.web import render_web_dashboard
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="AstroSim habitat simulator")
     parser.add_argument(
         "scenario",
@@ -41,15 +41,26 @@ def main() -> None:
         default=None,
         help="Random seed for Monte Carlo runs",
     )
-    args = parser.parse_args()
+    return parser
 
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    return build_parser().parse_args(argv)
+
+
+def output_stem(config_name: str) -> str:
+    return config_name.replace(" ", "_").lower()
+
+
+def run_from_args(args: argparse.Namespace) -> Path:
+    """Execute simulation and writes outputs; returns output directory."""
     config = load_scenario(args.scenario)
     simulator = load_and_build(args.scenario)
     result = simulator.run()
 
     out = args.output_dir
     out.mkdir(parents=True, exist_ok=True)
-    name = result.config.name.replace(" ", "_").lower()
+    name = output_stem(result.config.name)
 
     export_json(result, out / f"{name}.json")
     export_csv(result, out / f"{name}.csv")
@@ -83,6 +94,11 @@ def main() -> None:
         print(f"\nMonte Carlo: {mc_result.num_runs} runs written to {mc_path.name}")
 
     print(f"\nResults written to {out.resolve()}")
+    return out
+
+
+def main(argv: list[str] | None = None) -> None:
+    run_from_args(parse_args(argv))
 
 
 if __name__ == "__main__":

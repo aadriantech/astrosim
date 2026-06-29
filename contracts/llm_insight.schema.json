@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/llm_insight.schema.json",
+  "title": "AstroSim LLM Insight Response",
+  "description": "Minimal structure for parsed LLM completion used in adapters.",
+  "type": "object",
+  "required": ["content", "offline"],
+  "additionalProperties": false,
+  "properties": {
+    "content": { "type": "string" },
+    "offline": { "type": "boolean" },
+    "provider": { "type": "string" }
+  }
+}

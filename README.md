@@ -31,6 +31,8 @@ astrosim scenarios/lunar_base.yaml --web
 | [API.md](docs/API.md) | Public interfaces: `Simulator`, `Subsystem`, `AIHooks` |
 | [AGENTS.md](AGENTS.md) | Agent methodology (PDD→TDD→CDD→AYSU) |
 | [AGENT_INDEX.md](AGENT_INDEX.md) | Distributed memory index |
+| [TUTORIAL.md](docs/TUTORIAL.md) | 15-minute getting started |
+| [PLUGIN_COOKBOOK.md](docs/PLUGIN_COOKBOOK.md) | Custom subsystem patterns |
 | [CONTRIBUTING.md](docs/CONTRIBUTING.md) | Human contributor guide |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |
 | [PRD.md](docs/PRD.md) | Product requirements |

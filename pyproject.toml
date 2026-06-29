@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "astrosim"
-version = "0.1.0"
+version = "0.2.0"
 description = "Open-source simulation framework for sustainable space habitat modeling"
 readme = "README.md"
 license = "MIT"
@@ -33,7 +33,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "pytest-cov>=4.1", "jsonschema>=4.20"]
+dev = ["pytest>=8.0", "pytest-cov>=4.1", "jsonschema>=4.20", "scipy>=1.11"]
+optimize = ["scipy>=1.11"]
 ai = []
 
 [project.scripts]

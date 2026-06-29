@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from astrosim.budgeting.energy import EnergyBudget
 from astrosim.budgeting.mass import MassBudget
 from astrosim.budgeting.reliability import ReliabilityBudget
-from astrosim.engine.events import EventQueue, apply_event_payload
+from astrosim.engine.events import EventQueue, apply_event_payload, tick_event_recovery
 from astrosim.engine.state import SimulationConfig, SimulationState
 from astrosim.subsystems.base import Subsystem
 
@@ -51,6 +51,7 @@ class Simulator:
             state.time_hours = step * self.config.timestep_hours
             dt = self.config.timestep_hours
 
+            tick_event_recovery(self.config, state.time_hours)
             self._process_events(state)
 
             for subsystem in self.subsystems:
@@ -74,7 +75,7 @@ class Simulator:
     def _process_events(self, state: SimulationState) -> None:
         for event in self.event_queue.due_at(state.time_hours):
             state.events_fired.append(event.name)
-            apply_event_payload(self.config, event)
+            apply_event_payload(self.config, event, state.time_hours)
             if event.payload:
                 state.flags.update({f"event.{k}": bool(v) for k, v in event.payload.items()})
             if event.handler:

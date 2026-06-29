@@ -1,0 +1,44 @@
+{
+  "name": "Orbital Station Beta",
+  "location": "orbital",
+  "description": "Low-Earth orbit crewed station with solar arrays and reduced consumables logistics.",
+  "simulation": {
+    "duration_hours": 4380,
+    "timestep_hours": 12,
+    "crew_count": 4
+  },
+  "events": [
+    {
+      "time_hours": 720,
+      "name": "crew_rotation",
+      "payload": { "alert": 1, "duration_hours": 48 }
+    }
+  ],
+  "parameters": {
+    "solar_array_kw": 60,
+    "solar_capacity_factor": 0.55,
+    "battery_kwh": 300,
+    "base_load_kw": 15,
+    "o2_kg_per_person_day": 0.84,
+    "water_kg_per_person_day": 2.8,
+    "water_recovery_rate": 0.97,
+    "food_kg_per_person_day": 1.6,
+    "waste_kg_per_person_day": 0.4,
+    "waste_recovery_rate": 0.8,
+    "eclss_power_kw": 2.5,
+    "ambient_temp_c": -80,
+    "internal_target_c": 22,
+    "internal_heat_kw": 6,
+    "radiator_efficiency": 0.9,
+    "pressurized_volume_m3": 120,
+    "hull_mass_kg": 8000,
+    "radiation_shield_kg": 5000,
+    "micrometeoroid_annual_risk": 0.0005,
+    "max_crew": 6,
+    "regolith_throughput_kg_h": 0,
+    "compute_nodes": 4,
+    "watts_per_node": 120,
+    "ai_utilization": 0.4,
+    "inference_jobs_per_hour": 150
+  }
+}

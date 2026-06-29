@@ -2,7 +2,7 @@
 
 > **Read this first** to route context. Load only listed section files.
 
-**Last synced:** 2026-06-28 (Phase 5 complete — all TASKS.md items green)  
+**Last synced:** 2026-06-28 (Phase 6 complete · Phase 7 planned · integrity gate green)  
 **Sync policy:** See [AGENTS.md](AGENTS.md) · run `scripts/check_agent_sync.sh`
 
 | ID | Domain | Path | Load when… |
