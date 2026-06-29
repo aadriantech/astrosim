@@ -3,7 +3,7 @@
 [![CI](https://github.com/aadriantech/astrosim/actions/workflows/ci.yml/badge.svg)](https://github.com/aadriantech/astrosim/actions/workflows/ci.yml)
 [![GitHub](https://img.shields.io/github/v/tag/aadriantech/astrosim?label=version)](https://github.com/aadriantech/astrosim/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Docs](https://img.shields.io/badge/docs-MkDocs-blue)](https://github.com/aadriantech/astrosim/tree/main/docs)
+[![Docs](https://img.shields.io/badge/docs-MkDocs-blue)](https://aadriantech.github.io/astrosim/)
 
 Open-source, modular simulation framework for modeling, analyzing, and optimizing sustainable human and robotic presence in space — lunar bases, Mars habitats, orbital stations, and deep-space missions.
 

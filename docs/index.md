@@ -13,8 +13,8 @@ Open-source simulation framework for sustainable space habitat modeling.
 ## Install
 
 ```bash
-pip install -e ".[dev]"
-astrosim scenarios/lunar_base.yaml --web
+pip install git+https://github.com/aadriantech/astrosim.git
+astrosim scenarios/greenhouse_lunar.yaml --report --validate --no-plot
 ```
 
 See the [repository README](https://github.com/aadriantech/astrosim) for CI status and releases.

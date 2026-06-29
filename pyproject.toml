@@ -27,7 +27,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/aadriantech/astrosim"
-Documentation = "https://github.com/aadriantech/astrosim/tree/main/docs"
+Documentation = "https://aadriantech.github.io/astrosim/"
 Repository = "https://github.com/aadriantech/astrosim"
 Issues = "https://github.com/aadriantech/astrosim/issues"
 Changelog = "https://github.com/aadriantech/astrosim/blob/main/CHANGELOG.md"
