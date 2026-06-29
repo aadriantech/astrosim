@@ -80,3 +80,9 @@ pip install -i https://test.pypi.org/simple/ astrosim==0.5.0
 ```
 
 If `PYPI_API_TOKEN` is not set, Phase 9 exit gate accepts TestPyPI proof documented in release notes.
+
+## GitHub Pages (Phase 12)
+
+1. Repo **Settings → Pages → Build and deployment → GitHub Actions**
+2. Push to `main` runs `.github/workflows/docs.yml`
+3. MkDocs site builds from `mkdocs.yml`; deploy step requires Pages enabled on the repo

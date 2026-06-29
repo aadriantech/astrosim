@@ -25,6 +25,7 @@
 | Active GitHub community | ✅ CI, releases, contributing docs |
 | Published study example | ✅ `docs/studies/lunar_energy_trade.md` |
 | PyPI distribution | ✅ pypi-ready (`verify_pypi_ready.sh`); live publish needs `PYPI_API_TOKEN` |
+| GitHub Pages docs | ✅ workflow builds; enable Pages in repo settings for live URL |
 
 ## Non-goals (unchanged)
 
