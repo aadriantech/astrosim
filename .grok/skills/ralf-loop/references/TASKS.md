@@ -345,9 +345,26 @@
 
 ---
 
+## Phase 7 — Advanced Analysis & AI (v0.3.0)
+
+**Master plan:** `docs/plans/epic-phase7.md`  
+**Precondition:** `bash scripts/integrity_check.sh` green
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 7.1.1.1 | Pareto trade study API | `analysis/pareto.py` + CSV export | ⬜ |
+| 7.1.1.2 | trade_study schema | Contract + tests | ⬜ |
+| 7.2.1.1 | deep_space_transit scenario | YAML + JSON parity | ⬜ |
+| 7.3.1.1 | NL scenario editor | `ai/scenario_editor.py` mocked tests | ⬜ |
+| 7.4.1.1 | ISRU power coupling | Throughput tied to energy budget | ⬜ |
+| 7.5.1.1 | tutorial.ipynb | Colab-ready notebook | ⬜ |
+| 7.6.1.1 | Release v0.3.0 | Tag + STUDY_TEMPLATE.md | ⬜ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** `6.1.1.1` (GitHub push) then Phase 7
+- **Next incomplete (work order):** `6.1.1.1` (GitHub push) then `7.1.1.1`
 - **Master plan:** `docs/plans/epic-phase6.md` · Phase 7: `docs/plans/epic-phase7.md`
 - **Integrity gate:** `bash scripts/integrity_check.sh` (required before Phase 7)
 - **Blocked by:** GitHub credentials on host (6.1 push only)
