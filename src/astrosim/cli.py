@@ -47,6 +47,11 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="PROMPT",
         help="Dry-run NL scenario edit (prints YAML patch JSON, does not run sim)",
     )
+    parser.add_argument(
+        "--trade-study",
+        action="store_true",
+        help="Run solar vs battery Pareto trade study and write CSV",
+    )
     return parser
 
 
@@ -103,6 +108,27 @@ def run_from_args(args: argparse.Namespace) -> Path:
     return out
 
 
+def handle_trade_study(scenario_path: Path, output_dir: Path) -> None:
+    from astrosim.analysis.pareto import export_trade_study_csv, run_trade_study
+
+    config = load_scenario(scenario_path)
+    config.duration_hours = min(config.duration_hours, 168)
+    result = run_trade_study(
+        config,
+        build_simulator,
+        param_x="solar_array_kw",
+        param_y="battery_kwh",
+        values_x=[60.0, 80.0, 100.0, 120.0],
+        values_y=[200.0, 400.0, 600.0],
+        metric_a="energy.net_kwh",
+        metric_b="reliability.success",
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = export_trade_study_csv(result, output_dir / "trade_study.csv")
+    print(f"Trade study: {len(result.points)} points, {len(result.pareto_points)} Pareto-optimal")
+    print(f"Written to {path.resolve()}")
+
+
 def handle_ask(scenario_path: Path, prompt: str) -> None:
     import yaml
 
@@ -118,6 +144,9 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     if args.ask:
         handle_ask(args.scenario, args.ask)
+        return
+    if args.trade_study:
+        handle_trade_study(args.scenario, args.output_dir)
         return
     run_from_args(args)
 

@@ -13,6 +13,12 @@ def test_parse_solar_array_intent():
     assert patch.parameters == {"solar_array_kw": 120.0}
 
 
+def test_parse_battery_and_duration():
+    patch = parse_edit_intent("set battery storage to 500 kwh and set duration to 720 hours")
+    assert patch.parameters == {"battery_kwh": 500.0}
+    assert patch.simulation == {"duration_hours": 720.0}
+
+
 def test_apply_patch_merges_simulation():
     scenario = {
         "name": "t",
