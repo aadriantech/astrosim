@@ -93,6 +93,12 @@ examples/        # Runnable demo scripts
 docs/            # Architecture, API, scenarios, contributing
 ```
 
+## Agent workflow (how this was built)
+
+AstroSim was built with **PDD → TDD → CDD → AYSU** — open-sourced as [ai-coding-scaffold](https://github.com/aadriantech/ai-coding-scaffold).
+
+**Share / promote:** [copy-paste posts for X, Reddit, HN](https://github.com/aadriantech/ai-coding-scaffold/blob/main/docs/SHARE.md)
+
 ## Contributing
 
 See [CONTRIBUTING.md](docs/CONTRIBUTING.md).
