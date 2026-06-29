@@ -12,4 +12,6 @@
 
 Use skills: `pdd-plan`, `tdd-implement`, `cdd-review`, `aysu-verify`.
 
+**Why retired + future autonomous policy:** [ai-coding-scaffold/docs/DECISIONS.md](https://github.com/aadriantech/ai-coding-scaffold/blob/main/docs/DECISIONS.md)
+
 Task tracker migrated conceptually to `docs/plans/` epics. Historical IDs remain in `references/TASKS.md` for audit only — do not auto-continue RALF work order.

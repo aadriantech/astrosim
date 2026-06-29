@@ -70,7 +70,7 @@ AYSU:
 
 ## Deprecated
 
-**RALF loop** (`.grok/skills/ralf-loop`) is retired. Use PDD→TDD→CDD→AYSU. See `.grok/skills/ralf-loop/DEPRECATED.md`.
+**RALF loop** (`.grok/skills/ralf-loop`) is retired. Use PDD→TDD→CDD→AYSU. See `.grok/skills/ralf-loop/DEPRECATED.md`. Decision record: [ai-coding-scaffold/docs/DECISIONS.md](https://github.com/aadriantech/ai-coding-scaffold/blob/main/docs/DECISIONS.md).
 
 ## Related
 
