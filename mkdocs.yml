@@ -12,6 +12,7 @@ theme:
 
 nav:
   - Home: index.md
+  - Inputs & Outputs: IO.md
   - Tutorial: TUTORIAL.md
   - Architecture: ARCHITECTURE.md
   - Scenarios: SCENARIOS.md

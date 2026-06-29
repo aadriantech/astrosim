@@ -31,6 +31,7 @@ astrosim scenarios/lunar_base.yaml --web
 
 | Doc | Description |
 |-----|-------------|
+| [IO.md](docs/IO.md) | **Inputs & outputs** — scenarios in, JSON/CSV/dashboards out |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Engine, subsystems, budgets, events, plugins |
 | [SCENARIOS.md](docs/SCENARIOS.md) | YAML/JSON schema, parameters, examples |
 | [API.md](docs/API.md) | Public interfaces: `Simulator`, `Subsystem`, `AIHooks` |
