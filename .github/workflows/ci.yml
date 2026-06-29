@@ -40,3 +40,6 @@ jobs:
 
       - name: Build wheel smoke
         run: bash scripts/smoke_wheel.sh
+
+      - name: PyPI-ready verification
+        run: bash scripts/verify_pypi_ready.sh

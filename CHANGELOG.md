@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-06-29
+
+### Added (Phase 14)
+
+- `docs/ROADMAP.md` — project completion marker
+- All phases 1–14 tracked ✅ in TASKS.md
+
+### Added (Phase 13)
+
+- ISRU–ECLSS O₂ loop (`o2_supplied_kg`, `o2_net_import_kg`)
+- `orbital_greenhouse` scenario
+- `tests/test_closed_loop_audit.py`
+
+### Added (Phase 12)
+
+- `scripts/verify_pypi_ready.sh` + CI step
+- GitHub Pages docs workflow (`.github/workflows/docs.yml`)
+- Example study `docs/studies/lunar_energy_trade.md`
+- `publish.yml` graceful skip without `PYPI_API_TOKEN`
+
+### Changed
+
+- `__version__` synced to `1.0.0`
+
 ## [0.7.0] - 2026-06-29
 
 ### Added (Phase 11)

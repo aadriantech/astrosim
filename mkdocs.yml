@@ -18,6 +18,7 @@ nav:
   - API: API.md
   - Contributing: CONTRIBUTING.md
   - Study Template: STUDY_TEMPLATE.md
+  - Example Study: studies/lunar_energy_trade.md
 
 docs_dir: docs
 site_dir: site

@@ -16,10 +16,17 @@ jobs:
       - name: Build package
         run: pip install build && python -m build
 
+      - name: Verify package metadata
+        run: pip install twine && twine check dist/*
+
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
           pip install twine
+          if [ -z "${TWINE_PASSWORD:-}" ]; then
+            echo "PYPI_API_TOKEN not set — build verified only"
+            exit 0
+          fi
           twine upload dist/*

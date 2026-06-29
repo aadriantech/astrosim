@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/aadriantech/astrosim/actions/workflows/ci.yml/badge.svg)](https://github.com/aadriantech/astrosim/actions/workflows/ci.yml)
 [![GitHub](https://img.shields.io/github/v/tag/aadriantech/astrosim?label=version)](https://github.com/aadriantech/astrosim/releases)
+[![Docs](https://img.shields.io/badge/docs-MkDocs-blue)](https://github.com/aadriantech/astrosim#documentation)
 
 Open-source, modular, AI-native simulation framework for modeling, analyzing, and optimizing sustainable human and robotic presence in space.
 
@@ -40,6 +41,8 @@ astrosim scenarios/lunar_base.yaml --web
 | [CONTRIBUTING.md](docs/CONTRIBUTING.md) | Human contributor guide |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |
 | [MkDocs site](docs/index.md) | Build static docs: `bash scripts/build_docs.sh` |
+| [ROADMAP.md](docs/ROADMAP.md) | Phase completion status (v1.0.0) |
+| [Example study](docs/studies/lunar_energy_trade.md) | Reproducible lunar energy trade report |
 | [PRD.md](docs/PRD.md) | Product requirements |
 | [SRD.md](docs/SRD.md) | System requirements |
 

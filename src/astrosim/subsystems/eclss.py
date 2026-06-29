@@ -29,6 +29,8 @@ class ECLSSSubsystem(Subsystem):
         days = dt_hours / 24.0
 
         o2_consumed = crew * o2_kg_per_person_day * days
+        o2_supplied = state.metrics.get("isru.o2_produced_kg", 0.0)
+        o2_net_import = max(0.0, o2_consumed - o2_supplied)
         water_consumed = crew * water_kg_per_person_day * days
         food_consumed = crew * food_kg_per_person_day * days
         food_supplied = state.metrics.get("greenhouse.food_supplied_kg", 0.0)
@@ -46,6 +48,8 @@ class ECLSSSubsystem(Subsystem):
 
         return {
             "o2_consumed_kg": o2_consumed,
+            "o2_supplied_kg": o2_supplied,
+            "o2_net_import_kg": o2_net_import,
             "water_consumed_kg": water_consumed,
             "water_recovered_kg": water_recovered,
             "water_supplied_kg": water_supplied,

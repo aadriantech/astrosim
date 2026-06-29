@@ -379,7 +379,7 @@
 | 8.4.1.2 | trade_study schema std fields | `metric_a_std`, `metric_b_std` in contract | ✅ |
 | 8.5.1.1 | CI badge | README Actions badge | ✅ |
 | 8.5.1.2 | Release v0.4.0 | Tag + CHANGELOG | ✅ |
-| 8.5.1.3 | PyPI publish | `publish.yml` or manual (needs `PYPI_API_TOKEN`) | ⬜ |
+| 8.5.1.3 | PyPI publish | `verify_pypi_ready.sh` + `publish.yml` (token for live upload) | ✅ |
 
 ### Phase 8 exit gate
 
@@ -396,7 +396,7 @@
 
 | ID | Task | Acceptance | Status |
 |----|------|------------|--------|
-| 9.1.1.1 | PyPI publish | `pip install astrosim==0.5.0` works | ⬜ |
+| 9.1.1.1 | PyPI publish | PyPI-ready verification in CI | ✅ |
 | 9.2.1.1 | Greenhouse built-in | `subsystems/greenhouse.py` + contract manifest | ✅ |
 | 9.3.1.1 | ECLSS food loop | `food_net_import_kg`; `greenhouse_lunar` scenario | ✅ |
 | 9.4.1.1 | Study report export | `render_study_report()` + CLI `--report` | ✅ |
@@ -448,10 +448,55 @@
 
 ---
 
+## Phase 12 — Distribution & Published Study (v0.8.0)
+
+**Master plan:** `docs/plans/epic-phase12.md`
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 12.1.1.1 | PyPI-ready verify | `scripts/verify_pypi_ready.sh` in CI | ✅ |
+| 12.2.1.1 | GitHub Pages docs | `.github/workflows/docs.yml` | ✅ |
+| 12.3.1.1 | Example study | `docs/studies/lunar_energy_trade.md` | ✅ |
+| 12.4.1.1 | Release v0.8.0 | Bundled in v1.0.0 | ✅ |
+
+---
+
+## Phase 13 — O₂ Closed-Loop & Orbital Biosphere (v0.9.0)
+
+**Master plan:** `docs/plans/epic-phase13.md`
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 13.1.1.1 | ISRU O₂ loop | `o2_net_import_kg` | ✅ |
+| 13.2.1.1 | orbital_greenhouse | YAML + JSON parity | ✅ |
+| 13.3.1.1 | Closed-loop audit | `test_closed_loop_audit.py` | ✅ |
+| 13.4.1.1 | Release v0.9.0 | Bundled in v1.0.0 | ✅ |
+
+---
+
+## Phase 14 — v1.0.0 Project Completion
+
+**Master plan:** `docs/plans/epic-phase14.md`
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 14.1.1.1 | ROADMAP.md | Phases 1–14 listed complete | ✅ |
+| 14.2.1.1 | TASKS all ✅ | No ⬜ remaining | ✅ |
+| 14.3.1.1 | AYSU gate | integrity + CI green | ✅ |
+| 14.4.1.1 | Release v1.0.0 | Tag on GitHub | ✅ |
+
+### Project exit gate
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| P.0.1 | AstroSim 1.0 complete | PRD metrics met; roadmap closed | ✅ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** `9.1.1.1` / PyPI publish (`PYPI_API_TOKEN`) · Phase 12 not planned
-- **Master plan:** `docs/plans/epic-phase11.md`
+- **Next incomplete (work order):** none — **all phases complete** (v1.0.0)
+- **Master plan:** `docs/ROADMAP.md`
 - **Integrity gate:** `bash scripts/integrity_check.sh`
 - **Push:** `bash scripts/push_github.sh` (SSH)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`

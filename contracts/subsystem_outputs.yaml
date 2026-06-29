@@ -11,6 +11,8 @@ power:
 eclss:
   required_keys:
     - o2_consumed_kg
+    - o2_supplied_kg
+    - o2_net_import_kg
     - water_consumed_kg
     - water_recovered_kg
     - water_supplied_kg

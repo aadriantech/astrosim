@@ -1,0 +1,42 @@
+{
+  "name": "Orbital Greenhouse Station",
+  "location": "orbital",
+  "description": "LEO station with onboard greenhouse reducing food logistics.\n",
+  "simulation": {
+    "duration_hours": 720,
+    "timestep_hours": 12,
+    "crew_count": 4
+  },
+  "subsystems": [
+    "power",
+    "greenhouse",
+    "eclss",
+    "thermal",
+    "structure"
+  ],
+  "parameters": {
+    "solar_array_kw": 70,
+    "solar_capacity_factor": 0.55,
+    "battery_kwh": 350,
+    "base_load_kw": 16,
+    "growth_rate_kg_per_hour": 0.08,
+    "crew_tending_bonus": 0.012,
+    "food_yield_fraction": 0.82,
+    "greenhouse_power_kw": 2.5,
+    "o2_kg_per_person_day": 0.84,
+    "water_kg_per_person_day": 2.8,
+    "water_recovery_rate": 0.97,
+    "food_kg_per_person_day": 1.6,
+    "waste_kg_per_person_day": 0.4,
+    "waste_recovery_rate": 0.8,
+    "eclss_power_kw": 2.5,
+    "ambient_temp_c": -80,
+    "internal_target_c": 22,
+    "internal_heat_kw": 6,
+    "radiator_efficiency": 0.9,
+    "pressurized_volume_m3": 130,
+    "hull_mass_kg": 8500,
+    "radiation_shield_kg": 5200,
+    "micrometeoroid_annual_risk": 0.0005
+  }
+}

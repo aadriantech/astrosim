@@ -22,8 +22,13 @@ class MassBudget:
             if "food_net_import_kg" in outputs
             else outputs.get("food_consumed_kg", 0.0)
         )
+        o2_mass = (
+            outputs["o2_net_import_kg"]
+            if "o2_net_import_kg" in outputs
+            else outputs.get("o2_consumed_kg", 0.0)
+        )
         consumed = (
-            outputs.get("o2_consumed_kg", 0.0)
+            o2_mass
             + outputs.get("water_net_kg", 0.0)
             + food_mass
             + outputs.get("waste_net_kg", 0.0)
