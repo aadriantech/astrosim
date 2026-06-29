@@ -94,6 +94,8 @@ class AIHooks:
 
 
 def _offline_insights(result: SimulationResult) -> str:
+    from astrosim.export.interpretation import interpret_result
+
     parts = [f"Completed {len(result.history)} timesteps for '{result.config.name}'."]
     if result.energy_budget:
         e = result.energy_budget.summary()
@@ -104,4 +106,7 @@ def _offline_insights(result: SimulationResult) -> str:
     if result.reliability_budget:
         p = result.reliability_budget.mission_success_probability
         parts.append(f"Estimated mission success probability: {p:.4f}.")
+    interpretation = interpret_result(result)
+    if interpretation.verdict:
+        parts.append(f"Verdict: {interpretation.verdict}")
     return " ".join(parts)

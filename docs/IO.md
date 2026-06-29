@@ -239,6 +239,40 @@ Lunar Base Alpha       -1746.0           -2081.15              1.368
 
 ---
 
+## Interpreting outputs (implications & verdict)
+
+Raw numbers are not conclusions. AstroSim now adds rule-based **Implications** and **Verdict** when you use `--report` or offline CLI insights.
+
+| Signal | Meaning | Typical implication |
+|--------|---------|---------------------|
+| `energy.net_kwh < 0` | Power deficit over mission | Increase `solar_array_kw` or reduce load |
+| `mass.net_import_kg > 0` | Net logistics burden | Consumables exceed local production |
+| `mass.net_import_kg < 0` | Net local production | ISRU/recycling offsets imports |
+| `eclss.food_net_import_kg` high | Food resupply needed | Add greenhouse or accept food logistics |
+| `greenhouse.food_supplied_kg` > 0 | Local food credit | Lowers food net import per step |
+| `mission_success_probability` < 0.99 | Elevated structure risk | Review shielding / duration |
+
+### Example verdict — `greenhouse_lunar.yaml` (168 h, 4 crew)
+
+**Key results:** energy net **−72.8 kWh** · mass net import **+51.5 kg** · food net import **0.70 kg/step** (vs 1.80 without greenhouse) · reliability **0.99998**
+
+**Implications:**
+- Small energy deficit — close to balance; greenhouse + ECLSS load nearly covered by 80 kW solar.
+- Positive mass import — still need consumables, but greenhouse cuts food import ~39% per step.
+- Greenhouse costs ~2 kW — trades power for reduced food logistics.
+- Reliability high — micrometeoroid risk negligible at 168 h.
+
+**Verdict:** *Power system needs modest upgrade before scaling crew or duration. Greenhouse helps but logistics remain net-positive.*
+
+Generate this automatically:
+
+```bash
+astrosim scenarios/greenhouse_lunar.yaml --report --output-dir output/analysis
+grep -A5 "## Verdict" output/analysis/study_report.md
+```
+
+---
+
 ## Reproduce these samples
 
 ```bash

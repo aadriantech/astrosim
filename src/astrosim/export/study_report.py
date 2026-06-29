@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from astrosim.engine.simulator import SimulationResult
+from astrosim.export.interpretation import interpret_result
 
 
 def _metric_row(label: str, value: float | None, unit: str = "") -> str:
@@ -39,6 +40,7 @@ def render_study_report(
 
     scenario_file = str(scenario_path) if scenario_path else "scenarios/<file>.yaml"
     repro_cmd = f"astrosim {scenario_file} --output-dir output/study_run"
+    interpretation = interpret_result(result)
 
     lines = [
         "# AstroSim Study Report",
@@ -75,18 +77,31 @@ def render_study_report(
         "",
         "- Dashboard: see output directory `*_dashboard.png`",
         "",
-        "## Conclusions",
+        "## Implications",
         "",
-        "See Key Results for energy, mass, and reliability outcomes.",
+    ]
+    for item in interpretation.implications:
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+        "",
+        "## Verdict",
+        "",
+        interpretation.verdict,
         "",
         "## Reproducibility",
+        ]
+    )
+    lines.extend(
+        [
         "",
         "```bash",
         repro_cmd,
         "bash scripts/integrity_check.sh",
         "```",
         "",
-    ]
+        ]
+    )
 
     output.write_text("\n".join(lines))
 
@@ -98,6 +113,13 @@ def render_study_report(
         "crew_count": config.crew_count,
         "location": config.location,
         "metrics": metrics,
+        "implications": interpretation.implications,
+        "verdict": interpretation.verdict,
+        "status": {
+            "energy": interpretation.energy_status,
+            "logistics": interpretation.logistics_status,
+            "reliability": interpretation.reliability_status,
+        },
         "reproducibility_command": repro_cmd,
     }
     json_path = output.with_suffix(".json")

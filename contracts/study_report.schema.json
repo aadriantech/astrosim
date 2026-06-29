@@ -11,6 +11,9 @@
     "crew_count",
     "location",
     "metrics",
+    "implications",
+    "verdict",
+    "status",
     "reproducibility_command"
   ],
   "additionalProperties": false,
@@ -33,6 +36,20 @@
         "energy_net_kwh": { "type": ["number", "null"] },
         "mass_net_import_kg": { "type": ["number", "null"] },
         "mission_success_probability": { "type": ["number", "null"] }
+      }
+    },
+    "implications": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "verdict": { "type": "string" },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "energy": { "type": "string" },
+        "logistics": { "type": "string" },
+        "reliability": { "type": "string" }
       }
     },
     "reproducibility_command": { "type": "string" }
