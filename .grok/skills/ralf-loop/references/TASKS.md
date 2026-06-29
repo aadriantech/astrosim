@@ -362,11 +362,38 @@
 
 ---
 
+## Phase 8 — CI Restore & Production Hardening (v0.4.0)
+
+**Master plan:** `docs/plans/epic-phase8.md`  
+**Precondition:** SSH remote (`github.com-aadriantech`) configured
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 8.1.1.1 | SSH push remote | `git@github.com-aadriantech:aadriantech/astrosim.git` | ✅ |
+| 8.1.1.2 | CI workflows restored | `.github/workflows/` on remote | ✅ |
+| 8.1.1.3 | pyproject.toml fix | classifiers/deps under `[project]`; CI install green | ✅ |
+| 8.2.1.1 | Trade study CLI | `astrosim --trade-study` flag | ✅ |
+| 8.2.1.2 | run_trade_study example | `examples/run_trade_study.py` | ✅ |
+| 8.3.1.1 | NL editor battery/duration | Parse `battery_kwh`, `duration_hours` intents | ✅ |
+| 8.4.1.1 | MC trade envelope | `monte_carlo_runs` on `run_trade_study()` | ✅ |
+| 8.4.1.2 | trade_study schema std fields | `metric_a_std`, `metric_b_std` in contract | ✅ |
+| 8.5.1.1 | CI badge | README Actions badge | ✅ |
+| 8.5.1.2 | Release v0.4.0 | Tag + CHANGELOG | ✅ |
+| 8.5.1.3 | PyPI publish | `publish.yml` or manual (needs `PYPI_API_TOKEN`) | ⬜ |
+
+### Phase 8 exit gate
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 8.0.1 | Phase 8 AYSU | ≥121 tests, integrity green, CI green on main | ⬜ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** `6.1.1.5` (restore CI workflows) then Phase 8
-- **Master plan:** `docs/plans/epic-phase6.md` · Phase 7: `docs/plans/epic-phase7.md`
-- **Integrity gate:** `bash scripts/integrity_check.sh` (required before Phase 7)
-- **Blocked by:** GitHub credentials on host (6.1 push only)
+- **Next incomplete (work order):** `8.0.1` (CI green on main) then `8.5.1.3` (PyPI)
+- **Master plan:** `docs/plans/epic-phase8.md` · Phase 9: not planned
+- **Integrity gate:** `bash scripts/integrity_check.sh`
+- **Push:** `bash scripts/push_github.sh` (SSH)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`
 - **Fallback verify:** `python3 -m py_compile src/astrosim/subsystems/structure.py`

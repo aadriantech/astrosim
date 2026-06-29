@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-06-28
+
+### Added
+
+- Monte Carlo envelope option on `run_trade_study()` (`monte_carlo_runs` parameter)
+- CI badge in README
+
+### Fixed
+
+- `pyproject.toml` metadata (classifiers/deps were under `[project.urls]`, broke CI install)
+- Git remote uses SSH (`github.com-aadriantech` host alias)
+
+### Changed
+
+- Phase 8: trade study CLI, extended NL editor, workflows restored via SSH push
+
 ## [0.3.0] - 2026-06-28
 
 ### Added

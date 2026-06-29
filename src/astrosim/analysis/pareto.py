@@ -7,7 +7,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
+import numpy as np
+
 from astrosim.analysis.sensitivity import _extract_metric, _with_parameter
+from astrosim.engine.monte_carlo import MonteCarloRunner
 from astrosim.engine.simulator import Simulator
 from astrosim.engine.state import SimulationConfig
 
@@ -18,6 +21,8 @@ class TradeStudyPoint:
     param_y: float
     metric_a: float
     metric_b: float
+    metric_a_std: float = 0.0
+    metric_b_std: float = 0.0
     pareto_optimal: bool = False
 
 
@@ -46,6 +51,9 @@ def run_trade_study(
     metric_b: str,
     maximize_a: bool = True,
     maximize_b: bool = True,
+    monte_carlo_runs: int = 0,
+    mc_perturbation: float = 0.05,
+    mc_seed: int | None = None,
 ) -> TradeStudyResult:
     """Grid sweep two parameters; mark Pareto-optimal points on two metrics."""
     points: list[TradeStudyPoint] = []
@@ -54,13 +62,29 @@ def run_trade_study(
         for y in values_y:
             config = _with_parameter(base_config, param_x, x)
             config = _with_parameter(config, param_y, y)
-            result = build_simulator(config).run()
+            if monte_carlo_runs > 0:
+                metric_a_val, metric_a_std, metric_b_val, metric_b_std = _mc_metrics(
+                    config,
+                    build_simulator,
+                    metric_a=metric_a,
+                    metric_b=metric_b,
+                    num_runs=monte_carlo_runs,
+                    perturbation=mc_perturbation,
+                    seed=mc_seed,
+                )
+            else:
+                result = build_simulator(config).run()
+                metric_a_val = _extract_metric(result, metric_a)
+                metric_b_val = _extract_metric(result, metric_b)
+                metric_a_std = metric_b_std = 0.0
             points.append(
                 TradeStudyPoint(
                     param_x=x,
                     param_y=y,
-                    metric_a=_extract_metric(result, metric_a),
-                    metric_b=_extract_metric(result, metric_b),
+                    metric_a=metric_a_val,
+                    metric_b=metric_b_val,
+                    metric_a_std=metric_a_std,
+                    metric_b_std=metric_b_std,
                 )
             )
 
@@ -141,3 +165,29 @@ def _dominates(
     strictly_a = a1 > a2 if maximize_a else a1 < a2
     strictly_b = b1 > b2 if maximize_b else b1 < b2
     return better_a and better_b and (strictly_a or strictly_b)
+
+
+def _mc_metrics(
+    config: SimulationConfig,
+    build_simulator: Callable[[SimulationConfig], Simulator],
+    *,
+    metric_a: str,
+    metric_b: str,
+    num_runs: int,
+    perturbation: float,
+    seed: int | None,
+) -> tuple[float, float, float, float]:
+    runner = MonteCarloRunner(
+        base_config=config,
+        build_simulator=build_simulator,
+        seed=seed,
+    )
+    mc = runner.run(num_runs=num_runs, perturbation=perturbation)
+    values_a = [_extract_metric(run, metric_a) for run in mc.runs]
+    values_b = [_extract_metric(run, metric_b) for run in mc.runs]
+    return (
+        float(np.mean(values_a)),
+        float(np.std(values_a)),
+        float(np.mean(values_b)),
+        float(np.std(values_b)),
+    )

@@ -2,7 +2,7 @@
 
 > **Read this first** to route context. Load only listed section files.
 
-**Last synced:** 2026-06-28 (Phase 7 complete · v0.3.0 · 119 tests · 95% cov)  
+**Last synced:** 2026-06-29 (Phase 8 complete · v0.4.0 · 121 tests · 94% cov)  
 **Sync policy:** See [AGENTS.md](AGENTS.md) · run `scripts/check_agent_sync.sh`
 
 | ID | Domain | Path | Load when… |

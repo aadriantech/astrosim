@@ -58,6 +58,28 @@ def test_export_trade_study_csv(tmp_path):
     assert "pareto_optimal" in text
 
 
+def test_trade_study_with_monte_carlo_envelope():
+    config = load_scenario(ROOT / "scenarios" / "lunar_base.yaml")
+    config.duration_hours = 48
+    config.timestep_hours = 12
+
+    result = run_trade_study(
+        config,
+        build_simulator,
+        param_x="solar_array_kw",
+        param_y="battery_kwh",
+        values_x=[80.0, 100.0],
+        values_y=[400.0],
+        metric_a="energy.net_kwh",
+        metric_b="reliability.success",
+        monte_carlo_runs=3,
+        mc_seed=1,
+    )
+
+    assert len(result.points) == 2
+    assert result.points[0].metric_a_std >= 0.0
+
+
 def test_trade_study_schema():
     config = load_scenario(ROOT / "scenarios" / "lunar_base.yaml")
     config.duration_hours = 48

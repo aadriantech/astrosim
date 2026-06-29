@@ -1,5 +1,6 @@
 # AstroSim
 
+[![CI](https://github.com/aadriantech/astrosim/actions/workflows/ci.yml/badge.svg)](https://github.com/aadriantech/astrosim/actions/workflows/ci.yml)
 [![GitHub](https://img.shields.io/github/v/tag/aadriantech/astrosim?label=version)](https://github.com/aadriantech/astrosim/releases)
 
 Open-source, modular, AI-native simulation framework for modeling, analyzing, and optimizing sustainable human and robotic presence in space.

@@ -15,13 +15,23 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["param_x", "param_y", "metric_a", "metric_b", "pareto_optimal"],
+        "required": [
+          "param_x",
+          "param_y",
+          "metric_a",
+          "metric_b",
+          "metric_a_std",
+          "metric_b_std",
+          "pareto_optimal"
+        ],
         "additionalProperties": false,
         "properties": {
           "param_x": { "type": "number" },
           "param_y": { "type": "number" },
           "metric_a": { "type": "number" },
           "metric_b": { "type": "number" },
+          "metric_a_std": { "type": "number" },
+          "metric_b_std": { "type": "number" },
           "pareto_optimal": { "type": "boolean" }
         }
       }

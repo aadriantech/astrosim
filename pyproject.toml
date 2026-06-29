@@ -4,20 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "astrosim"
-version = "0.3.0"
+version = "0.4.0"
 description = "Open-source simulation framework for sustainable space habitat modeling"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [{ name = "aadriantech" }]
 keywords = ["space", "simulation", "habitat", "aerospace", "monte-carlo"]
-
-[project.urls]
-Homepage = "https://github.com/aadriantech/astrosim"
-Documentation = "https://github.com/aadriantech/astrosim/tree/main/docs"
-Repository = "https://github.com/aadriantech/astrosim"
-Issues = "https://github.com/aadriantech/astrosim/issues"
-Changelog = "https://github.com/aadriantech/astrosim/blob/main/CHANGELOG.md"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
@@ -31,6 +24,13 @@ dependencies = [
     "pandas>=2.1",
     "matplotlib>=3.8",
 ]
+
+[project.urls]
+Homepage = "https://github.com/aadriantech/astrosim"
+Documentation = "https://github.com/aadriantech/astrosim/tree/main/docs"
+Repository = "https://github.com/aadriantech/astrosim"
+Issues = "https://github.com/aadriantech/astrosim/issues"
+Changelog = "https://github.com/aadriantech/astrosim/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-cov>=4.1", "jsonschema>=4.20", "scipy>=1.11"]
