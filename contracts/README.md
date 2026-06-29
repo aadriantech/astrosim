@@ -12,6 +12,8 @@
 | [optimization_result.schema.json](optimization_result.schema.json) | Optimizer output from `minimize_metric` | active |
 | [llm_insight.schema.json](llm_insight.schema.json) | Structured LLM insight response | active |
 | [trade_study.schema.json](trade_study.schema.json) | Pareto trade study export | active |
+| [study_report.schema.json](study_report.schema.json) | Study report metadata sidecar | planned (Phase 9) |
+| [scenario_compare.schema.json](scenario_compare.schema.json) | Multi-scenario compare export | planned (Phase 9) |
 
 New interfaces: update contract first (PDD), then tests (TDD), then code.
 

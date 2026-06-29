@@ -389,10 +389,33 @@
 
 ---
 
+## Phase 9 — Research Workflows & Biosphere Closure (v0.5.0)
+
+**Master plan:** `docs/plans/epic-phase9.md`  
+**Precondition:** Phase 8 exit gate green
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 9.1.1.1 | PyPI publish | `pip install astrosim==0.5.0` works | ⬜ |
+| 9.2.1.1 | Greenhouse built-in | `subsystems/greenhouse.py` + contract manifest | ⬜ |
+| 9.3.1.1 | ECLSS food loop | `food_net_import_kg`; `greenhouse_lunar` scenario | ⬜ |
+| 9.4.1.1 | Study report export | `render_study_report()` + CLI `--report` | ⬜ |
+| 9.5.1.1 | Scenario compare | `compare_scenarios()` + CLI `--compare` | ⬜ |
+| 9.6.1.1 | NL editor write-back | `--ask --write` patched YAML | ⬜ |
+| 9.7.1.1 | Release v0.5.0 | Tag + CHANGELOG + AGENT sync | ⬜ |
+
+### Phase 9 exit gate
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 9.0.1 | Phase 9 AYSU | ≥130 tests, ≥85% cov, CDD approve 9.2–9.5 | ⬜ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** `8.5.1.3` (PyPI publish) then Phase 9 planning
-- **Master plan:** `docs/plans/epic-phase8.md` · Phase 9: not planned
+- **Next incomplete (work order):** `9.1.1.1` (PyPI publish) — see Phase 9
+- **Master plan:** `docs/plans/epic-phase9.md` · Phase 8: `docs/plans/epic-phase8.md`
 - **Integrity gate:** `bash scripts/integrity_check.sh`
 - **Push:** `bash scripts/push_github.sh` (SSH)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`
