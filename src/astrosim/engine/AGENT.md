@@ -18,7 +18,7 @@
 ## Gotchas
 
 - Simulator calls `subsystem.update()` directly and updates `_local_state` itself — prefer `step()` in unit tests for `get_state()`.
-- Event handlers cataloged in `contracts/events.yaml`; `isru_ramp_up` active, others noop.
+- Event handlers cataloged in `contracts/events.yaml`; all cataloged events are `active`.
 
 ## Verification status
 

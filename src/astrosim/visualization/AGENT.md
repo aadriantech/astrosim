@@ -7,7 +7,7 @@
 
 ## Gotchas
 
-- Matplotlib dashboard is 2×3 grid; low line coverage — PNG path under-tested in CI.
+- Matplotlib dashboard is 2×3 grid; PNG path tested in `tests/test_visualization.py`.
 
 ## Verification status
 
@@ -15,7 +15,8 @@
 |-------|--------|
 | HTML dashboard renders scenario name | VERIFIED |
 | Web ECLSS + thermal series | VERIFIED |
+| Matplotlib PNG export | VERIFIED |
 
 ## Tests
 
-- `tests/test_srd_features.py::test_web_dashboard_generation`
+- `tests/test_visualization.py`, `tests/test_srd_features.py::test_web_dashboard_generation`

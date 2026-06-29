@@ -5,6 +5,20 @@ All notable changes to AstroSim are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `scenarios/mars_habitat.json` with full YAML parity
+- Active `dust_storm` and `crew_rotation` event handlers
+- `tests/test_visualization.py` for matplotlib dashboard PNG output
+- Phase 5 contract/export CI gates and registry cleanup (see TASKS.md)
+
+### Changed
+
+- Removed unused `scipy` dependency
+- Parity tests parametrized for lunar and Mars scenarios
+
 ## [0.1.0] - 2026-06-28
 
 ### Added

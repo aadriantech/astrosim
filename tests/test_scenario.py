@@ -21,3 +21,10 @@ def test_load_mars_scenario():
     assert len(config.events) == 2
     assert config.events[0].name == "dust_storm"
     assert config.events[1].name == "isru_ramp_up"
+
+
+def test_load_mars_scenario_json():
+    config = load_scenario(ROOT / "scenarios" / "mars_habitat.json")
+    assert config.name == "Mars Habitat One"
+    assert config.crew_count == 6
+    assert len(config.events) == 2

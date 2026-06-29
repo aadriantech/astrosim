@@ -1,0 +1,41 @@
+{
+  "name": "Mars Habitat One",
+  "location": "mars",
+  "description": "Pressurized Mars surface habitat with reduced solar insolation, higher ISRU reliance, and expanded compute for mission planning.",
+  "simulation": {
+    "duration_hours": 2160,
+    "timestep_hours": 12,
+    "crew_count": 6
+  },
+  "events": [
+    { "time_hours": 720, "name": "dust_storm", "payload": { "alert": 1 } },
+    { "time_hours": 1440, "name": "isru_ramp_up", "payload": { "boost": 1 } }
+  ],
+  "parameters": {
+    "solar_array_kw": 120,
+    "solar_capacity_factor": 0.18,
+    "battery_kwh": 800,
+    "base_load_kw": 30,
+    "o2_kg_per_person_day": 0.84,
+    "water_kg_per_person_day": 3.5,
+    "water_recovery_rate": 0.96,
+    "eclss_power_kw": 5.0,
+    "ambient_temp_c": -60,
+    "internal_target_c": 22,
+    "internal_heat_kw": 12,
+    "radiator_efficiency": 0.82,
+    "pressurized_volume_m3": 280,
+    "hull_mass_kg": 18000,
+    "radiation_shield_kg": 25000,
+    "micrometeoroid_annual_risk": 0.0012,
+    "max_crew": 8,
+    "regolith_throughput_kg_h": 120,
+    "o2_extraction_yield": 0.03,
+    "water_extraction_yield": 0.008,
+    "isru_power_kw": 18,
+    "compute_nodes": 10,
+    "watts_per_node": 180,
+    "ai_utilization": 0.7,
+    "inference_jobs_per_hour": 400
+  }
+}

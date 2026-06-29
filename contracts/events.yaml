@@ -9,11 +9,13 @@ events:
       sets isru_ramp_active in parameters and event.* flags from payload.
 
   crew_rotation:
-    handler: noop
+    handler: active
     description: >
-      Sets event.* flags from payload only; no parameter mutation.
+      Sets crew_rotation_active; increases water_recovery_rate by 0.02 (max 0.99);
+      event.* flags set from payload in simulator.
 
   dust_storm:
-    handler: noop
+    handler: active
     description: >
-      Sets event.* flags from payload only; no parameter mutation.
+      Reduces solar_capacity_factor by 0.5*severity (severity from payload or alert*0.3);
+      sets dust_storm_active; event.* flags set from payload in simulator.

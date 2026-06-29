@@ -8,8 +8,8 @@
 ## Files
 
 - `lunar_base.yaml` — canonical full param set
-- `lunar_base.json` — parity with YAML **VERIFIED** (`tests/test_scenario_parity.py`)
-- `mars_habitat.yaml` — long-duration Mars; has events
+- `lunar_base.json` — parity with YAML **VERIFIED** (`tests/test_contracts_parity.py`)
+- `mars_habitat.yaml` / `mars_habitat.json` — long-duration Mars; parity **VERIFIED**
 
 ## Gotchas
 

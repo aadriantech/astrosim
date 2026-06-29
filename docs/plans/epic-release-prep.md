@@ -42,7 +42,7 @@ MVP is feature-complete with contracts, but CI lacks coverage/example gates, reg
 4. [x] Test asserts builtin count stable after plugin test
 5. [x] `scipy` removed from `pyproject.toml`
 6. [x] All pytest green; smoke script passes locally
-7. [x] Initial git commit pushed to `origin/main` (if remote accessible)
+7. [x] Initial git commit on `main` (push blocked — no GitHub credentials on host)
 
 ## Out of scope
 

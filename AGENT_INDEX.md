@@ -2,7 +2,7 @@
 
 > **Read this first** to route context. Load only listed section files.
 
-**Last synced:** 2026-06-28 (epic-release-prep complete)  
+**Last synced:** 2026-06-28 (Phase 5 complete — all TASKS.md items green)  
 **Sync policy:** See [AGENTS.md](AGENTS.md) · run `scripts/check_agent_sync.sh`
 
 | ID | Domain | Path | Load when… |

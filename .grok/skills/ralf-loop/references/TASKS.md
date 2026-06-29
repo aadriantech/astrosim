@@ -227,11 +227,12 @@
 | 3.1.1.1 | Lunar base example | `examples/run_lunar_base.py` runs end-to-end | ✅ |
 | 3.1.1.2 | Mars habitat example | `examples/run_mars_habitat.py` with Monte Carlo | ✅ |
 | 3.1.2.1 | Mars scenario events | `mars_habitat.yaml` includes scheduled events | ✅ |
-| 3.1.3.1 | Lunar scenario parity | JSON and YAML lunar scenarios structurally aligned | ⬜ |
+| 3.1.3.1 | Lunar scenario parity | JSON and YAML lunar scenarios structurally aligned | ✅ |
+| 3.1.3.2 | Mars scenario parity | JSON and YAML mars scenarios structurally aligned | ✅ |
 | 3.2.1.1 | CLI --monte-carlo flag | CLI option runs MC and writes summary JSON | ✅ |
 | 3.2.1.2 | AI optimization in CLI | CLI prints optimization suggestions | ✅ |
 | 3.3.1.1 | pyproject dev extras | `pip install -e ".[dev]"` installs pytest | ✅ |
-| 3.3.1.2 | Test coverage gate | pytest-cov reports ≥80% line coverage | ⬜ |
+| 3.3.1.2 | Test coverage gate | pytest-cov reports ≥80% line coverage | ✅ |
 
 ---
 
@@ -241,7 +242,7 @@
 |----|------|------------|--------|
 | 4.1.1.1 | CHANGELOG | `CHANGELOG.md` documents v0.1.0 features | ✅ |
 | 4.1.1.2 | CI workflow | GitHub Actions runs pytest on push/PR | ✅ |
-| 4.1.1.3 | Coverage in CI | CI fails if coverage drops below threshold | ⬜ |
+| 4.1.1.3 | Coverage in CI | CI fails if coverage drops below threshold | ✅ |
 | 4.2.1.1 | SRD test matrix | README or docs map SRD reqs → tests | ✅ |
 | 4.2.1.2 | Contributing guide | `CONTRIBUTING.md` with dev setup and RALF loop | ✅ |
 | 4.3.1.1 | Version tag prep | `pyproject.toml` version matches release | ✅ |
@@ -250,9 +251,24 @@
 
 ---
 
+## Phase 5 — Contracts, Events & Hardening
+
+| ID | Task | Acceptance | Status |
+|----|------|------------|--------|
+| 5.1.1.1 | Export result schema | `contracts/export_result.schema.json` + tests | ✅ |
+| 5.1.1.2 | CI example smoke | `scripts/smoke_examples.sh` in workflow | ✅ |
+| 5.1.1.3 | Registry test cleanup | `unregister_subsystem()` + tests | ✅ |
+| 5.2.1.1 | Active dust_storm handler | Reduces `solar_capacity_factor` | ✅ |
+| 5.2.1.2 | Active crew_rotation handler | Sets flag + bumps water recovery | ✅ |
+| 5.2.1.3 | Event catalog sync | `contracts/events.yaml` matches handlers | ✅ |
+| 5.3.1.1 | Matplotlib dashboard test | `tests/test_visualization.py` PNG assert | ✅ |
+| 5.3.1.2 | Remove unused scipy dep | Dropped from `pyproject.toml` | ✅ |
+
+---
+
 ## Quick Reference
 
-- **Next incomplete (work order):** `3.1.3.1`
-- **Blocked by:** nothing
+- **Next incomplete (work order):** none — MVP + Phase 5 complete
+- **Blocked by:** GitHub push (credentials on host)
 - **Verify command:** `cd /home/adrianlos/projects/astrosim && PYTHONPATH=src python3 -m pytest tests/ -q`
 - **Fallback verify:** `python3 -m py_compile src/astrosim/subsystems/structure.py`
