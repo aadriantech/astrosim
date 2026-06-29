@@ -1,0 +1,46 @@
+name: Deep Space Transit One
+location: deep_space
+description: >
+  Long-duration crewed transit with heavy compute load and minimal ISRU.
+
+simulation:
+  duration_hours: 8760
+  timestep_hours: 24
+  crew_count: 4
+
+events:
+  - time_hours: 2160
+    name: crew_rotation
+    payload:
+      alert: 1
+      duration_hours: 72
+
+parameters:
+  solar_array_kw: 40
+  solar_capacity_factor: 0.12
+  battery_kwh: 600
+  base_load_kw: 12
+  o2_kg_per_person_day: 0.84
+  water_kg_per_person_day: 3.2
+  water_recovery_rate: 0.98
+  food_kg_per_person_day: 1.5
+  waste_kg_per_person_day: 0.4
+  waste_recovery_rate: 0.85
+  eclss_power_kw: 2.0
+  ambient_temp_c: -270
+  internal_target_c: 22
+  internal_heat_kw: 5
+  radiator_efficiency: 0.85
+  pressurized_volume_m3: 90
+  hull_mass_kg: 12000
+  radiation_shield_kg: 8000
+  micrometeoroid_annual_risk: 0.002
+  max_crew: 6
+  regolith_throughput_kg_h: 0
+  isru_power_kw: 0
+  compute_nodes: 12
+  watts_per_node: 200
+  ai_utilization: 0.85
+  inference_jobs_per_hour: 500
+  radiation_sv_per_year: 0.6
+  compute_shielding_factor: 0.6

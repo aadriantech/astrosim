@@ -352,13 +352,13 @@
 
 | ID | Task | Acceptance | Status |
 |----|------|------------|--------|
-| 7.1.1.1 | Pareto trade study API | `analysis/pareto.py` + CSV export | ⬜ |
-| 7.1.1.2 | trade_study schema | Contract + tests | ⬜ |
-| 7.2.1.1 | deep_space_transit scenario | YAML + JSON parity | ⬜ |
-| 7.3.1.1 | NL scenario editor | `ai/scenario_editor.py` mocked tests | ⬜ |
-| 7.4.1.1 | ISRU power coupling | Throughput tied to energy budget | ⬜ |
-| 7.5.1.1 | tutorial.ipynb | Colab-ready notebook | ⬜ |
-| 7.6.1.1 | Release v0.3.0 | Tag + STUDY_TEMPLATE.md | ⬜ |
+| 7.1.1.1 | Pareto trade study API | `analysis/pareto.py` + CSV export | ✅ |
+| 7.1.1.2 | trade_study schema | Contract + tests | ✅ |
+| 7.2.1.1 | deep_space_transit scenario | YAML + JSON parity | ✅ |
+| 7.3.1.1 | NL scenario editor | `ai/scenario_editor.py` mocked tests | ✅ |
+| 7.4.1.1 | ISRU power coupling | Throughput tied to energy budget | ✅ |
+| 7.5.1.1 | tutorial.ipynb | Colab-ready notebook | ✅ |
+| 7.6.1.1 | Release v0.3.0 | Tag + STUDY_TEMPLATE.md | ✅ |
 
 ---
 

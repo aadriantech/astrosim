@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-06-28
+
+### Added
+
+- Pareto trade study API (`analysis/pareto.py`) + CSV export
+- NL scenario editor (`ai/scenario_editor.py`) + CLI `--ask` dry-run
+- `deep_space_transit` scenario (YAML + JSON)
+- ISRU power-limited throughput + `regolith_quality` parameter
+- `examples/tutorial.ipynb`, `docs/STUDY_TEMPLATE.md`
+
 ## [0.2.0] - 2026-06-28
 
 ### Added

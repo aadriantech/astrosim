@@ -37,3 +37,27 @@ def test_o2_produced_equals_processed_times_yield():
 
     processed = throughput * dt_hours
     assert result["o2_produced_kg"] == pytest.approx(processed * o2_yield)
+
+
+def test_throughput_reduced_when_energy_limited():
+    isru = ISRUSubsystem()
+    state = SimulationState(energy_kwh=0.0)
+    result = isru.update(
+        state,
+        10.0,
+        {
+            "regolith_throughput_kg_h": 100.0,
+            "isru_power_kw": 20.0,
+            "battery_kwh": 50.0,
+        },
+    )
+    assert result["power_limited_factor"] < 1.0
+    assert result["regolith_processed_kg"] < 1000.0
+
+
+def test_regolith_quality_scales_output():
+    isru = ISRUSubsystem()
+    state = SimulationState(energy_kwh=500.0)
+    full = isru.update(state, 1.0, {"regolith_throughput_kg_h": 100.0, "regolith_quality": 1.0})
+    half = isru.update(state, 1.0, {"regolith_throughput_kg_h": 100.0, "regolith_quality": 0.5})
+    assert half["regolith_processed_kg"] == pytest.approx(full["regolith_processed_kg"] * 0.5)

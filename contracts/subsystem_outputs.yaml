@@ -42,6 +42,7 @@ isru:
     - o2_produced_kg
     - water_produced_kg
     - power_kw
+    - power_limited_factor
 
 compute:
   required_keys:

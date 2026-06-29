@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from astrosim.cli import build_parser, output_stem, parse_args, run_from_args
+from astrosim.cli import build_parser, handle_ask, output_stem, parse_args, run_from_args
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -69,3 +69,10 @@ def test_run_from_args_writes_artifacts(tmp_path, with_plot, capsys):
         assert (tmp_path / "lunar_base_alpha_dashboard.png").exists()
     captured = capsys.readouterr()
     assert "Results written to" in captured.out
+
+
+def test_handle_ask_dry_run(capsys):
+    handle_ask(ROOT / "scenarios" / "lunar_base.yaml", "increase crew to 8")
+    captured = capsys.readouterr()
+    assert '"dry_run": true' in captured.out
+    assert '"crew_count": 8' in captured.out

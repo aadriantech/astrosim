@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/aadriantech/astrosim/contracts/trade_study.schema.json",
+  "title": "AstroSim Trade Study Result",
+  "type": "object",
+  "required": ["param_x", "param_y", "metric_a", "metric_b", "points"],
+  "additionalProperties": false,
+  "properties": {
+    "param_x": { "type": "string" },
+    "param_y": { "type": "string" },
+    "metric_a": { "type": "string" },
+    "metric_b": { "type": "string" },
+    "points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["param_x", "param_y", "metric_a", "metric_b", "pareto_optimal"],
+        "additionalProperties": false,
+        "properties": {
+          "param_x": { "type": "number" },
+          "param_y": { "type": "number" },
+          "metric_a": { "type": "number" },
+          "metric_b": { "type": "number" },
+          "pareto_optimal": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

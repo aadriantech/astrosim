@@ -18,6 +18,11 @@ SCENARIO_PAIRS = [
         ROOT / "scenarios" / "orbital_station.yaml",
         ROOT / "scenarios" / "orbital_station.json",
     ),
+    (
+        "deep_space_transit",
+        ROOT / "scenarios" / "deep_space_transit.yaml",
+        ROOT / "scenarios" / "deep_space_transit.json",
+    ),
 ]
 
 

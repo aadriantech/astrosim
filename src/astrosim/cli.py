@@ -41,6 +41,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Random seed for Monte Carlo runs",
     )
+    parser.add_argument(
+        "--ask",
+        type=str,
+        metavar="PROMPT",
+        help="Dry-run NL scenario edit (prints YAML patch JSON, does not run sim)",
+    )
     return parser
 
 
@@ -97,8 +103,23 @@ def run_from_args(args: argparse.Namespace) -> Path:
     return out
 
 
+def handle_ask(scenario_path: Path, prompt: str) -> None:
+    import yaml
+
+    from astrosim.ai.scenario_editor import apply_patch, parse_edit_intent
+
+    data = yaml.safe_load(scenario_path.read_text())
+    patch = parse_edit_intent(prompt)
+    updated = apply_patch(data, patch)
+    print(json.dumps({"dry_run": True, "patch": patch.__dict__, "scenario": updated}, indent=2))
+
+
 def main(argv: list[str] | None = None) -> None:
-    run_from_args(parse_args(argv))
+    args = parse_args(argv)
+    if args.ask:
+        handle_ask(args.scenario, args.ask)
+        return
+    run_from_args(args)
 
 
 if __name__ == "__main__":

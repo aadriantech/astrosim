@@ -1,7 +1,7 @@
 ---
 task_id: epic-phase7
 task_class: T3
-status: ready
+status: complete
 epic: phase7
 srd_refs: ["§2.3", "§2.4"]
 prd_refs: ["§4", "§7"]
