@@ -20,14 +20,21 @@ cd /home/adrianlos/projects/astrosim
 bash scripts/push_github.sh
 ```
 
-**Option B — manual:** Create empty repo `aadriantech/astrosim` on GitHub, then:
+**Option B — SSH (recommended on this host):**
+
+Remote uses `git@github.com-aadriantech:aadriantech/astrosim.git` with key `~/.ssh/id_ed25519_aadriantech`.
 
 ```bash
 git push -u origin main
-git push origin v0.1.0 v0.2.0
+git push origin v0.3.0
 ```
 
-SSH auth on this host is configured for `icgtdistrictlos`. You need repo create access under `aadriantech` or set `GITHUB_OWNER=icgtdistrictlos`.
+Restore CI workflows after scope refresh:
+
+```bash
+gh auth refresh -h github.com -s workflow,repo
+bash scripts/restore_ci_push.sh
+```
 
 ## Tag a release
 

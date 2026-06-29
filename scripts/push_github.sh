@@ -10,7 +10,7 @@ cd "$ROOT"
 
 OWNER="${GITHUB_OWNER:-aadriantech}"
 REPO="${GITHUB_REPO:-astrosim}"
-REMOTE="git@github.com:${OWNER}/${REPO}.git"
+REMOTE="git@github.com-aadriantech:${OWNER}/${REPO}.git"
 
 GH="${GH:-gh}"
 if ! command -v "$GH" >/dev/null 2>&1; then

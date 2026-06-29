@@ -11,7 +11,7 @@ if [[ ! -d .github/workflows ]]; then
 fi
 
 echo "Ensure workflow scope: gh auth refresh -h github.com -s workflow,repo"
-/home/adrianlos/.local/bin/gh auth setup-git 2>/dev/null || true
+git remote set-url origin git@github.com-aadriantech:aadriantech/astrosim.git
 
 git add .github/workflows
 git diff --cached --quiet && echo "Workflows already committed" || \
