@@ -92,7 +92,7 @@ Custom plugins registered via `@register_subsystem` can be included by name.
 |-----------|---------|-------------|
 | `o2_kg_per_person_day` | `0.84` | O₂ consumption per person-day |
 | `water_kg_per_person_day` | `3.0` | Water use per person-day |
-| `water_recovery_rate` | `0.93` | Fraction of water recycled |
+| `water_recovery_rate` | `0.93` | Fraction of water recycled. 0.93 is the ISS figure before the Brine Processor Assembly; NASA reported 0.98 with it in 2023 ([source](https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station/)) |
 | `food_kg_per_person_day` | `1.8` | Food mass per person-day |
 | `waste_kg_per_person_day` | `0.5` | Waste per person-day |
 | `waste_recovery_rate` | `0.75` | Waste processing fraction |

@@ -21,6 +21,7 @@ class ECLSSSubsystem(Subsystem):
         water_kg_per_person_day = params.get("water_kg_per_person_day", 3.0)
         food_kg_per_person_day = params.get("food_kg_per_person_day", 1.8)
         waste_kg_per_person_day = params.get("waste_kg_per_person_day", 0.5)
+        # 0.93: ISS total water recovery before the Brine Processor Assembly; 0.98 with it (NASA, 2023).
         water_recovery_rate = params.get("water_recovery_rate", 0.93)
         waste_recovery_rate = params.get("waste_recovery_rate", 0.75)
         co2_ppm = self._local_state.get("co2_ppm", params.get("co2_ppm", 400.0))

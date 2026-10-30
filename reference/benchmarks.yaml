@@ -26,6 +26,8 @@ scenario_envelopes:
         min: 2.4
         max: 3.2
       water_recovery_rate:
+        # NASA (2023): ISS total water recovery 93-94% before the Brine Processor Assembly, 98% with it.
+        # https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station/
         min: 0.93
         max: 0.99
       mass_net_import_kg_per_crew_year:
